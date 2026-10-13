@@ -2,15 +2,39 @@ name: ymir
 stable:
   - version: 0.3.3
     assets:
-      win-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-windows-x86_64-AVX2-v0.3.3.zip
-      macos-arm64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-arm64-v0.3.3.zip
-      macos-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-x64-v0.3.3.zip
-      linux-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-linux-x86_64-AVX2-v0.3.3.tar.xz
+      win-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-windows-x86_64-AVX2-v0.3.3.zip
+        sha256: fef946a8e39742bbecb9df5a19281b25e48b682e7d469aa4f9d6bf311c6f911e
+        size: 10224489
+      macos-arm64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-arm64-v0.3.3.zip
+        sha256: 9581eec06de0f99c7aa8670a20e6f6151fe59a1807dfb51de436a697eaa22409
+        size: 10419413
+      macos-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-x64-v0.3.3.zip
+        sha256: 445a3cc49df79060ea90c46128947c4cfe542494dd5a448a4676508d97406ff7
+        size: 10826689
+      linux-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-linux-x86_64-AVX2-v0.3.3.tar.xz
+        sha256: d0775852c7c1e3dfa90307078094255d3ca8826ee4d27ce0f980227eec6e7572
+        size: 8824540
 preview: []
 nightly:
   - version: 0.4.0-dev_839aef3b
     assets:
-      win-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-windows-x86_64-AVX2-v0.4.0-dev_839aef3b.zip
-      macos-arm64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-arm64-v0.4.0-dev_839aef3b.zip
-      macos-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-x64-v0.4.0-dev_839aef3b.zip
-      linux-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-linux-x86_64-AVX2-v0.4.0-dev_839aef3b.tar.xz
+      win-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-windows-x86_64-AVX2-v0.4.0-dev_839aef3b.zip
+        sha256: 32843d536a1b8307c84c3d3654a6a77cf4e1408785ff33022da336dcd820d73b
+        size: 23512308
+      macos-arm64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-arm64-v0.4.0-dev_839aef3b.zip
+        sha256: aecbd7b3462b5bc4826a889e4028686de9319f6ffd2c50e5e31ae9ab90001238
+        size: 8694549
+      macos-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-x64-v0.4.0-dev_839aef3b.zip
+        sha256: 837620ebda62ec041dcb92197dbcccdb9adbd17d237359428019cb5521ba25cd
+        size: 9240937
+      linux-x64:
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-linux-x86_64-AVX2-v0.4.0-dev_839aef3b.tar.xz
+        sha256: b26458efa0a8b62f0f369550722d2fba550fbb11abccddc5cbef1d4d824e311e
+        size: 20460488
