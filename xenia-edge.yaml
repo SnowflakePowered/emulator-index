@@ -4,6 +4,15 @@ preview: []
 nightly:
   - version: 06c98e2
     assets:
-      win-x64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_windows.zip
-      macos-arm64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_macos.dmg
-      linux-x64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_linux.AppImage
+      win-x64:
+        url: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_windows.zip
+        sha256: 279075c321bd0661c98c84ffad4ad01309330c61eb50d936bce966ba977ee2a3
+        size: 11107297
+      macos-arm64:
+        url: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_macos.dmg
+        sha256: bb87e96a0ad1b97b4a0d10456803291b0e8a95a3a84938588edf5cfdf0994de5
+        size: 38643441
+      linux-x64:
+        url: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_linux.AppImage
+        sha256: 643ad65ba8c3ac7a4088d45f325e4ebd5bc3107e7ef963690daace2c5af53d1e
+        size: 19540472
