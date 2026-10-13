@@ -2,13 +2,31 @@ name: ppsspp
 stable:
   - version: 1.20.4
     assets:
-      win-x64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-Windows-x64.zip
-      macos-arm64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPPSDL-macOS-v1.20.4.zip
-      linux-x64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-anylinux-x86_64.AppImage
+      win-x64:
+        url: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-Windows-x64.zip
+        sha256: fbc9cd2f5131b159a92424e5c458c35ce43ba603cdded64dfc98e4bd4f17ff93
+        size: 20390334
+      macos-arm64:
+        url: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPPSDL-macOS-v1.20.4.zip
+        sha256: fb32a215861a293c28f641bf47f3164766ba512214025f4457796c8d14242665
+        size: 37389023
+      linux-x64:
+        url: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-anylinux-x86_64.AppImage
+        sha256: 661c098e6b7f7610171a57b7c533ce8bba6f2312b71e76d61e850461973eba21
+        size: 50689748
 preview: []
 nightly:
-  - version: v1.20.4-2960-g709e2ac277d9
+  - version: v1.20.4-2961-g2b724699ced1
     assets:
-      win-x64: https://builds.ppsspp.org/builds/v1.20.4-2960-g709e2ac277d9/ppsspp_win_v1.20.4-2960-g709e2ac277d9.zip
-      macos-arm64: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11816149872.zip
-      linux-x64: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11815828340.zip
+      win-x64:
+        url: https://builds.ppsspp.org/builds/v1.20.4-2961-g2b724699ced1/ppsspp_win_v1.20.4-2961-g2b724699ced1.zip
+        sha256: d583c55537510ea90665fed6b677fc80c9d7b8f06a76e2bb86c6a12f4277d741
+        size: 27265747
+      macos-arm64:
+        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11820801093.zip
+        sha256: 54d289685f6629649383cead201c4bfe3d606801e1860fd17b63492dcc7d5b9f
+        size: 40605369
+      linux-x64:
+        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11819767265.zip
+        sha256: 967834086986fcb3578156ada6661b376922ab4c63ad64f23b76d4890b291bfe
+        size: 55973571
