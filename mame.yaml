@@ -2,11 +2,23 @@ name: mame
 stable:
   - version: "0.289"
     assets:
-      win-x64: https://github.com/mamedev/mame/releases/download/mame0289/mame0289b_x64.exe
+      win-x64:
+        url: https://github.com/mamedev/mame/releases/download/mame0289/mame0289b_x64.exe
+        sha256: a1aa7912168c9d1b05e611906bc21b8b9be3935822aead36d12a1da363150b7d
+        size: 87626249
 preview: []
 nightly:
   - version: ca0a9a1
     assets:
-      win-x64: https://nightly.link/mamedev/mame/actions/artifacts/11821494461.zip
-      macos-arm64: https://nightly.link/mamedev/mame/actions/artifacts/11811927963.zip
-      linux-x64: https://nightly.link/mamedev/mame/actions/artifacts/11819630621.zip
+      win-x64:
+        url: https://nightly.link/mamedev/mame/actions/artifacts/11821494461.zip
+        sha256: 40f907d043999d3fc5966a9e369e2b8ad3bd36d438c670bcb1b75d89ad49e1e7
+        size: 140966240
+      macos-arm64:
+        url: https://nightly.link/mamedev/mame/actions/artifacts/11811927963.zip
+        sha256: 2144c13509e8b0f53db9bdc07ab7d5caa229da0e04d79a27cadfe34426c9d7b3
+        size: 111437159
+      linux-x64:
+        url: https://nightly.link/mamedev/mame/actions/artifacts/11819630621.zip
+        sha256: eff097ee78af4aca6105fdfd5f9e04f6012750900417e483a8eee8bae4bbd588
+        size: 127840883
