@@ -2,13 +2,31 @@ name: retroarch
 stable:
   - version: 1.22.2
     assets:
-      win-x64: https://buildbot.libretro.com/stable/1.22.2/windows/x86_64/RetroArch.7z
-      macos-arm64: https://buildbot.libretro.com/stable/1.22.2/apple/osx/universal/RetroArch_Metal.dmg
-      linux-x64: https://buildbot.libretro.com/stable/1.22.2/linux/x86_64/RetroArch.7z
+      win-x64:
+        url: https://buildbot.libretro.com/stable/1.22.2/windows/x86_64/RetroArch.7z
+        sha256: b2139b1d0f9d4526dc6b5ce23cbb3efdc766096fa6f2c3df016818b486ac6372
+        size: 202509078
+      macos-arm64:
+        url: https://buildbot.libretro.com/stable/1.22.2/apple/osx/universal/RetroArch_Metal.dmg
+        sha256: 81b79121ba26d539064ae13b4d0419a120c3d165afbe656cf5f5412b15fdb434
+        size: 232801022
+      linux-x64:
+        url: https://buildbot.libretro.com/stable/1.22.2/linux/x86_64/RetroArch.7z
+        sha256: 7d62da9a21397d6e1b9490785cedbeafd262781b50115076736fbe8a77ef30e9
+        size: 179361448
 preview: []
 nightly:
   - version: "2026-10-13"
     assets:
-      win-x64: https://buildbot.libretro.com/nightly/windows/x86_64/2026-10-13_RetroArch.7z
-      macos-arm64: https://buildbot.libretro.com/nightly/apple/osx/universal/2026-10-09_RetroArch_Metal.dmg
-      linux-x64: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-12_RetroArch.7z
+      win-x64:
+        url: https://buildbot.libretro.com/nightly/windows/x86_64/2026-10-13_RetroArch.7z
+        sha256: da5d2df7fe21bd6c5a68445cd1cbc8e4045d6b12f8ab43e3723bd13e0b00b5d1
+        size: 182700074
+      macos-arm64:
+        url: https://buildbot.libretro.com/nightly/apple/osx/universal/2026-10-09_RetroArch_Metal.dmg
+        sha256: 23a193be336d32b2162fa26aebd5ae1fcfd29baf5691935d18cca4141ba72944
+        size: 247192157
+      linux-x64:
+        url: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-12_RetroArch.7z
+        sha256: a23c8d4a9cc2ea6b1eea3350ba1925906d398e593a26d5b7bf18b6a170cd62ad
+        size: 190797053
