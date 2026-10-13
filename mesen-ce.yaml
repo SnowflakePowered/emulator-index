@@ -2,15 +2,39 @@ name: mesen-ce
 stable:
   - version: 2.2.1
     assets:
-      win-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Windows.zip
-      macos-arm64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_ARM64_AppleSilicon.zip
-      macos-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_x64_Intel.zip
-      linux-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Linux_x64.zip
+      win-x64:
+        url: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Windows.zip
+        sha256: c19e10b3b3865eb0e86e4d01bf09a5027a4452081c04b5bd5b6cbbf76e346fd6
+        size: 34259023
+      macos-arm64:
+        url: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_ARM64_AppleSilicon.zip
+        sha256: 9c230cc25ad0bae79fed810c9eeb21c1c507b96b1ce795bbd22ca4331ffb6e48
+        size: 76586217
+      macos-x64:
+        url: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_x64_Intel.zip
+        sha256: 804cca46e70b9015898973b5a0a86e679d13f93a89e10813f74e3b7364c9c2d7
+        size: 79751571
+      linux-x64:
+        url: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Linux_x64.zip
+        sha256: c88ff4d251b407515c43d3332d641927655cd69fb538996b6a21da4509dbb58f
+        size: 39623318
 preview: []
 nightly:
   - version: 4b8a196
     assets:
-      win-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483144254.zip
-      macos-arm64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484505635.zip
-      macos-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484831607.zip
-      linux-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483084305.zip
+      win-x64:
+        url: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483144254.zip
+        sha256: 6296e76cb086c54da97083f17adee2bb33a29695db4ee1135c8ea9c451c753b8
+        size: 32974185
+      macos-arm64:
+        url: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484505635.zip
+        sha256: fee9e0a37bbb3abfe25aba0e7a4f88f12ba4f2ca76f1cf9092ca48741e3e8bbe
+        size: 55520532
+      macos-x64:
+        url: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484831607.zip
+        sha256: a8b1070472ff1c2204d10567f0fd8dc5539fcc415a9253d38d7c51d9893cea2f
+        size: 59816471
+      linux-x64:
+        url: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483084305.zip
+        sha256: 18d9d85efd8e80a882859a1a2edc3c6c02b7089be3444f3873dcc5937c12fea8
+        size: 33564823
