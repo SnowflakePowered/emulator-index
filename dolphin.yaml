@@ -2,13 +2,31 @@ name: dolphin
 stable:
   - version: 2609a
     assets:
-      win-x64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x64.7z
-      macos-arm64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-universal.dmg
-      linux-x64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x86_64.flatpak
+      win-x64:
+        url: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x64.7z
+        sha256: bbfd13bf9e6d2a4164a15c392b1f32a9b18150e5136746b388704608fbb60f76
+        size: 20037671
+      macos-arm64:
+        url: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-universal.dmg
+        sha256: 9a810043538f21b53cf8f8f747b1672df74895d3d6eb30940d96042823f20ecb
+        size: 42010379
+      linux-x64:
+        url: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x86_64.flatpak
+        sha256: dcedfff449e8367944960dd61161b459f6163314c45c917cf75440514800d21a
+        size: 17798088
 preview: []
 nightly:
   - version: 2609-81
     assets:
-      win-x64: https://dl.dolphin-emu.org/builds/75/46/dolphin-master-2609-81-x64.7z
-      macos-arm64: https://dl.dolphin-emu.org/builds/9d/06/dolphin-master-2609-81-universal.dmg
-      linux-x64: https://dl.dolphin-emu.org/builds/8b/aa/dolphin-master-2609-81-x86_64.flatpak
+      win-x64:
+        url: https://dl.dolphin-emu.org/builds/75/46/dolphin-master-2609-81-x64.7z
+        sha256: cfbb5793c764e9652362eb55cec465c95a1a4025b3f0c5929bc00f60fc090da7
+        size: 20034626
+      macos-arm64:
+        url: https://dl.dolphin-emu.org/builds/9d/06/dolphin-master-2609-81-universal.dmg
+        sha256: 25b6bb964babc7f3e867fb7ba440ab351016825cd871c503be735bfb5edeff7a
+        size: 41966774
+      linux-x64:
+        url: https://dl.dolphin-emu.org/builds/8b/aa/dolphin-master-2609-81-x86_64.flatpak
+        sha256: d510b43b90eec3bd6317c92f843d9a06a0dc196250b1e859f9cf3f07c8c21e26
+        size: 17830552
