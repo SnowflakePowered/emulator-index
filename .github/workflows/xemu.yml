@@ -62,4 +62,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add xemu.yaml
           git commit -m "xemu: update releases"
-          git push
+          # several update workflows can run at once (see global-dispatch), so
+          # rebase and retry if another one pushed first
+          for attempt in 1 2 3 4 5; do
+            git push && exit 0
+            git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
+          done
+          exit 1

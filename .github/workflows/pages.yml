@@ -11,7 +11,7 @@ on:
   schedule:
     - cron: "0 16 * * *"
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - "*.yaml"
       - ".github/workflows/pages.yml"

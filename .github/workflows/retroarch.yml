@@ -19,9 +19,10 @@ jobs:
 
       # Both channels come from buildbot.libretro.com.
       # stable  = highest numbered directory under /stable/; history is kept.
-      # nightly = the rolling builds under /nightly/ (the URLs always point at
-      #           the newest build). Its version is the date of the newest
-      #           dated Windows build. Only the newest is kept.
+      # nightly = the newest dated build of each platform under /nightly/ (the
+      #           dated files never change, so each URL is a fixed build). The
+      #           version is the date of the Windows build. Only the newest is
+      #           kept.
       # RetroArch has no preview channel.
       - name: Update stable and nightly
         run: |
@@ -49,12 +50,21 @@ jobs:
             ' retroarch.yaml
           fi
 
-          # nightly
-          date=$(curl -fsSL "$BUILDBOT/nightly/windows/x86_64/" \
-            | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}_RetroArch[.]7z' | cut -d_ -f1 | sort | tail -1)
-          nightly_assets=$(assets "$BUILDBOT/nightly" | to_json)
-          if [ -n "$date" ] && [ "$nightly_assets" != "{}" ]; then
-            entry=$(jq -nc --arg v "$date" --argjson a "$nightly_assets" '{version: $v, assets: $a}')
+          # nightly: the newest dated file of each platform. Dated files never
+          # change, unlike the rolling undated ones.
+          latest_dated() { # directory under /nightly/, file name suffix
+            curl -fsSL "$BUILDBOT/nightly/$1/"               | grep -oE "[0-9]{4}-[0-9]{2}-[0-9]{2}_$2" | sort | tail -1
+          }
+          win=$(latest_dated windows/x86_64 'RetroArch[.]7z')
+          mac=$(latest_dated apple/osx/universal 'RetroArch_Metal[.]dmg')
+          linux=$(latest_dated linux/x86_64 'RetroArch[.]7z')
+
+          nightly_assets=$(
+            { [ -z "$win" ]   || echo "win-x64 $BUILDBOT/nightly/windows/x86_64/$win"
+              [ -z "$mac" ]   || echo "macos-arm64 $BUILDBOT/nightly/apple/osx/universal/$mac"
+              [ -z "$linux" ] || echo "linux-x64 $BUILDBOT/nightly/linux/x86_64/$linux"; } | to_json)
+          if [ -n "$win" ] && [ "$nightly_assets" != "{}" ]; then
+            entry=$(jq -nc --arg v "${win%%_*}" --argjson a "$nightly_assets" '{version: $v, assets: $a}')
             ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' retroarch.yaml
           fi
 
@@ -72,4 +82,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add retroarch.yaml
           git commit -m "retroarch: update releases"
-          git push
+          # several update workflows can run at once (see global-dispatch), so
+          # rebase and retry if another one pushed first
+          for attempt in 1 2 3 4 5; do
+            git push && exit 0
+            git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
+          done
+          exit 1

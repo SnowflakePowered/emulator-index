@@ -9,6 +9,6 @@ preview: []
 nightly:
   - version: "2026-10-13"
     assets:
-      win-x64: https://buildbot.libretro.com/nightly/windows/x86_64/RetroArch.7z
-      macos-arm64: https://buildbot.libretro.com/nightly/apple/osx/universal/RetroArch_Metal.dmg
-      linux-x64: https://buildbot.libretro.com/nightly/linux/x86_64/RetroArch.7z
+      win-x64: https://buildbot.libretro.com/nightly/windows/x86_64/2026-10-13_RetroArch.7z
+      macos-arm64: https://buildbot.libretro.com/nightly/apple/osx/universal/2026-10-09_RetroArch_Metal.dmg
+      linux-x64: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-12_RetroArch.7z

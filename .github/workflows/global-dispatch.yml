@@ -1,0 +1,66 @@
+name: global-dispatch
+
+# Manual trigger that refreshes everything: runs every update-* workflow,
+# waits for them to finish, then publishes the website (build-pages).
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the website once the updates have finished
+        type: boolean
+        default: true
+
+permissions:
+  actions: write
+  contents: read
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Run every update workflow and wait
+        run: |
+          start=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          workflows=$(gh workflow list --all --limit 200 --json name,path \
+            --jq '[.[] | select(.name | startswith("update-"))]')
+          count=$(jq length <<<"$workflows")
+          echo "Dispatching $count update workflows"
+          [ "$count" -gt 0 ] || { echo "no update-* workflows found"; exit 1; }
+
+          for path in $(jq -r '.[].path' <<<"$workflows"); do
+            gh workflow run "$path" --ref "$GITHUB_REF_NAME"
+          done
+
+          # one API call per poll, to stay well inside the rate limit
+          names=$(jq -c '[.[].name]' <<<"$workflows")
+          while true; do
+            sleep 30
+            runs=$(gh run list --event workflow_dispatch --created ">=$start" --limit 200 \
+              --json workflowName,status,conclusion)
+            waiting=$(jq -r --argjson want "$names" '
+              [ $want[] as $n
+                | select(([.[] | select(.workflowName == $n and .status == "completed")] | length) == 0)
+                | $n ] | length' <<<"$runs")
+            echo "$waiting of $count still running or queued"
+            [ "$waiting" -eq 0 ] && break
+            [ "$SECONDS" -lt 13800 ] || { echo "timed out waiting for updates"; exit 1; }
+          done
+
+          failed=$(jq -r '
+            [ .[] | select((.workflowName | startswith("update-")) and .status == "completed" and .conclusion != "success")
+              | "\(.workflowName): \(.conclusion)" ] | .[]' <<<"$runs")
+          if [ -n "$failed" ]; then
+            echo "$failed" | while read -r line; do echo "::warning::$line"; done
+            exit 1
+          fi
+
+      # runs even if some updates failed, so the successful ones still publish
+      - name: Publish the website
+        if: ${{ !cancelled() && inputs.publish }}
+        run: gh workflow run pages.yml --ref "$GITHUB_REF_NAME"
