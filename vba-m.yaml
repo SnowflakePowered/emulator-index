@@ -2,13 +2,31 @@ name: vba-m
 stable:
   - version: 2.2.3
     assets:
-      win-x64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Win-x86_64.zip
-      macos-arm64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-ARM64.zip
-      macos-x64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-x86_64.zip
+      win-x64:
+        url: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Win-x86_64.zip
+        sha256: ad2def2d99b1bf07bd194a40f574ee3eb15401c7a7182507771bfa4d00435fc3
+        size: 16782451
+      macos-arm64:
+        url: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-ARM64.zip
+        sha256: 8356a49d20e5d56e8e014ec537e2335e8c1904b8b22eb982d7190cf8d2d7973a
+        size: 19643562
+      macos-x64:
+        url: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-x86_64.zip
+        sha256: e8e39a82c1d6555bd21dd48955d09ccbf4ffd42c793bf67a702cafffbf18fd1f
+        size: 21547183
 preview: []
 nightly:
   - version: "2026-10-12T23:31:55Z"
     assets:
-      win-x64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Win-x86_64.zip
-      macos-arm64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-ARM64.zip
-      macos-x64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-x86_64.zip
+      win-x64:
+        url: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Win-x86_64.zip
+        sha256: f0c7616ecae5f6d9de4b65f975c6d23b1f343b0d551981e2c5356f83e643789a
+        size: 152522748
+      macos-arm64:
+        url: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-ARM64.zip
+        sha256: 869628e9aa9d4e80d84ed75a16cc95d42da86800b9e7fd058369d34651631abd
+        size: 156876385
+      macos-x64:
+        url: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-x86_64.zip
+        sha256: 294387141c29ab65ec8c8fc213bfdd146306cd17f0e8d189dcd3b17655d0e2c2
+        size: 161132512
