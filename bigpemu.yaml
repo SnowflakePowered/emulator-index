@@ -2,7 +2,13 @@ name: bigpemu
 stable:
   - version: "1.221"
     assets:
-      win-x64: https://www.richwhitehouse.com/jaguar/builds/BigPEmu_v1221.zip
-      linux-x64: https://www.richwhitehouse.com/jaguar/builds/BigPEmu_Linux64_v1221.tar.gz
+      win-x64:
+        url: https://www.richwhitehouse.com/jaguar/builds/BigPEmu_v1221.zip
+        sha256: 90b49dff119c66f8e8bd6eb45c1c5f24959dde165778e3d0e7fb5f7c46ee8c3d
+        size: 10805979
+      linux-x64:
+        url: https://www.richwhitehouse.com/jaguar/builds/BigPEmu_Linux64_v1221.tar.gz
+        sha256: c0ff610f21d5f55c01c404ef991d89f769a5b3b893c8570c033bcef44121ee57
+        size: 8912737
 preview: []
 nightly: []
