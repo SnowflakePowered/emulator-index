@@ -2,14 +2,35 @@ name: cemu
 stable:
   - version: "2.6"
     assets:
-      win-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-windows-x64.zip
-      macos-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-macos-12-x64.dmg
-      linux-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/Cemu-2.6-x86_64.AppImage
+      win-x64:
+        url: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-windows-x64.zip
+        sha256: a6bcc2bc42a362d10213819948f3152fae7d47f70067f25939b51d3ddcfb0896
+        size: 26374093
+      macos-x64:
+        url: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-macos-12-x64.dmg
+        sha256: 698c4b298f94983e4d6c30e9687ba8ff05094dd3930837c5104cddc0b0a49e4e
+        size: 36588188
+      linux-x64:
+        url: https://github.com/cemu-project/Cemu/releases/download/v2.6/Cemu-2.6-x86_64.AppImage
+        sha256: 0c20c4aeb800bb13d9bab9474ef45a6f8fcde6402cad9b32ac2a1bbd03186313
+        size: 61423960
 preview: []
 nightly:
-  - version: 540487b
+  - version: 2c212b5
     assets:
-      win-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782586898.zip
-      macos-arm64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782407081.zip
-      macos-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782820782.zip
-      linux-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782890485.zip
+      win-x64:
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/11827534244.zip
+        sha256: fbc927f2b23b7a7f786a9ddaf5f2c1796852127577016024fa7d24c60065dfac
+        size: 11527247
+      macos-arm64:
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/11827119381.zip
+        sha256: b35c7b5f88b5768854bf784dba46938b8510be4b04a2be16a1ad0e74c01dc166
+        size: 35209938
+      macos-x64:
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/11827359059.zip
+        sha256: 751eea203e8e3e5b442f93d341019f120acce234ea439f208c1a8596f0b43941
+        size: 36528624
+      linux-x64:
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/11827184615.zip
+        sha256: 4077f77607ba8f837cb754291c96bbf7c90990bf99da6f1299cd612977ee067a
+        size: 62583288
