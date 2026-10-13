@@ -2,12 +2,27 @@ name: melonds
 stable:
   - version: "1.1"
     assets:
-      win-x64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-windows-x86_64.zip
-      macos-arm64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-macOS-universal.zip
-      linux-x64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-appimage-x86_64.zip
+      win-x64:
+        url: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-windows-x86_64.zip
+        sha256: 9f3f8a244103be20b5b657af5b0ed1b2a66bb20a7181476a6d294c9a53d4f8c8
+        size: 19484283
+      macos-arm64:
+        url: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-macOS-universal.zip
+        sha256: 79843a5e5cab93188bd11942bff5440b9505ee91c6f526f7e90c22e3cff6718d
+        size: 24378474
+      linux-x64:
+        url: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-appimage-x86_64.zip
+        sha256: bf377420a2e95f2cd2cdda17d5372b51c2534f858b038db9ec6d129554875124
+        size: 34289284
 preview: []
 nightly:
   - version: 906e9eb
     assets:
-      win-x64: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501355970.zip
-      macos-arm64: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501678370.zip
+      win-x64:
+        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501355970.zip
+        sha256: 19ecbf833d488962ea2d79c13a80e9d92f0dd714772d9c477fa8d4c81e9deb81
+        size: 14767101
+      macos-arm64:
+        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501678370.zip
+        sha256: 37dbe30af6ee004e71e18fd32291483434049b9a247db49b81e8f9aaa44276b5
+        size: 24822760
