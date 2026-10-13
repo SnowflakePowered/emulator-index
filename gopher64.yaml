@@ -2,13 +2,31 @@ name: gopher64
 stable:
   - version: 1.1.40
     assets:
-      win-x64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-windows-x86_64.exe
-      macos-arm64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-macos-aarch64.zip
-      linux-x64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-linux-x86_64
+      win-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-windows-x86_64.exe
+        sha256: c9569f0830b970399686430cccf0229641b9df4323a2b4da9774b48f870ca942
+        size: 64256320
+      macos-arm64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-macos-aarch64.zip
+        sha256: af21a52ebde87c1339e4f5256ae08add1be5c684f362b128c164fe660e1c87f8
+        size: 34105457
+      linux-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-linux-x86_64
+        sha256: 3da4a1e6d3a9039ce45493b53f26898c35307e026daaf8f9d560757788ba7bb9
+        size: 65595480
 preview: []
 nightly:
   - version: 374a8ce
     assets:
-      win-x64: https://nightly.link/gopher64/gopher64/actions/artifacts/11822997744.zip
-      macos-arm64: https://nightly.link/gopher64/gopher64/actions/artifacts/11823570494.zip
-      linux-x64: https://nightly.link/gopher64/gopher64/actions/artifacts/11822922101.zip
+      win-x64:
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11822997744.zip
+        sha256: 3dad273659e7915e761dda5ca23992d30ca1f67f343b656cad6042cccb5d176f
+        size: 34460801
+      macos-arm64:
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11823570494.zip
+        sha256: 63885578bd9d63aac2802b3ce957aea2e1dedd5b41a8168f8468f1b130d8fe97
+        size: 75231300
+      linux-x64:
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11822922101.zip
+        sha256: 9d078681e2a9884ec2a21244a767c70936bfb9e84e33ea6d9e80065ac267b402
+        size: 195158955
