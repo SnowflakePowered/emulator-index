@@ -51,6 +51,10 @@ jobs:
           ENTRY=$(rolling_entry latest) yq -i -P '.preview = [env(ENTRY)]' duckstation.yaml
           ENTRY=$(rolling_entry preview) yq -i -P '.nightly = [env(ENTRY)]' duckstation.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh duckstation.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- duckstation.yaml; then

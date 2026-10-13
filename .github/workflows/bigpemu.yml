@@ -35,6 +35,10 @@ jobs:
             .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
           ' bigpemu.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh bigpemu.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- bigpemu.yaml; then

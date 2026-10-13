@@ -36,6 +36,10 @@ jobs:
             }')
           ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' vita3k.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh vita3k.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- vita3k.yaml; then

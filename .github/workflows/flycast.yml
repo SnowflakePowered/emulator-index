@@ -73,6 +73,10 @@ jobs:
           ENTRY=$(branch_entry master) yq -i -P '.preview = [env(ENTRY)]' flycast.yaml
           ENTRY=$(branch_entry dev) yq -i -P '.nightly = [env(ENTRY)]' flycast.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh flycast.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- flycast.yaml; then

@@ -46,6 +46,10 @@ jobs:
           ' ares.yaml
           ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' ares.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh ares.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- ares.yaml; then

@@ -76,6 +76,10 @@ jobs:
             ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' ppsspp.yaml
           fi
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh ppsspp.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- ppsspp.yaml; then

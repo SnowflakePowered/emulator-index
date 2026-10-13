@@ -77,6 +77,10 @@ jobs:
 
           ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' azahar.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh azahar.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- azahar.yaml; then

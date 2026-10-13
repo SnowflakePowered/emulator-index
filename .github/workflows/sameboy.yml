@@ -36,6 +36,10 @@ jobs:
             .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
           ' sameboy.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh sameboy.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- sameboy.yaml; then

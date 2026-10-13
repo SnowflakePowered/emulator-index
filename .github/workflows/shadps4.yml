@@ -48,6 +48,10 @@ jobs:
           ' shadps4.yaml
           ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' shadps4.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh shadps4.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- shadps4.yaml; then

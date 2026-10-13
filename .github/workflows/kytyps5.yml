@@ -37,6 +37,10 @@ jobs:
               }')
           ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' kytyps5.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh kytyps5.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- kytyps5.yaml; then

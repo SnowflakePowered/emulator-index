@@ -75,6 +75,10 @@ jobs:
             ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' dosbox-x.yaml
           fi
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh dosbox-x.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- dosbox-x.yaml; then

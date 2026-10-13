@@ -57,6 +57,10 @@ jobs:
           entry=$(jq -nc --arg v "$version" --argjson a "$assets" '{version: $v, assets: $a}')
           ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' vba-m.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh vba-m.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- vba-m.yaml; then

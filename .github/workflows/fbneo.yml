@@ -56,6 +56,10 @@ jobs:
           ' fbneo.yaml
           ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' fbneo.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh fbneo.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- fbneo.yaml; then

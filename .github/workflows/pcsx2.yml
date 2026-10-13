@@ -44,6 +44,10 @@ jobs:
           ' pcsx2.yaml
           ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' pcsx2.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh pcsx2.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- pcsx2.yaml; then

@@ -34,6 +34,10 @@ jobs:
             .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
           ' parallel-launcher.yaml
 
+      # adds sha256 and size to every asset (see scripts/checksums.sh)
+      - name: Add checksums
+        run: bash scripts/checksums.sh parallel-launcher.yaml
+
       - name: Commit changes
         run: |
           if git diff --quiet -- parallel-launcher.yaml; then

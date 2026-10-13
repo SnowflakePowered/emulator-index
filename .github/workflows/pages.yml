@@ -50,7 +50,7 @@ jobs:
 
           jq -n --slurpfile idx emulators.json --slurpfile ch channels.json --arg now "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
             {
-              schema_version: 1,
+              schema_version: 2,
               generated_at: $now,
               emulators: ($idx[0] | with_entries(.value += $ch[0][.key]))
             }' > site/index.json
