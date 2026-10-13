@@ -4,4 +4,7 @@ preview: []
 nightly:
   - version: 585c49a
     assets:
-      win-x86: https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/releases/download/CI-585c49a/CxbxReloaded-Release.zip
+      win-x86:
+        url: https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/releases/download/CI-585c49a/CxbxReloaded-Release.zip
+        sha256: 010d1e85bee9f82f05ae57ca483e7ae61fecba06c1637bf6b5a74ca09b03bf43
+        size: 4579292
