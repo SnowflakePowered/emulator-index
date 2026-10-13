@@ -2,7 +2,13 @@ name: parallel-launcher
 stable:
   - version: 9.0.6
     assets:
-      win-x64: https://parallel-launcher.ca/windows-releases/parallel-launcher-v9.0.6-windows64.zip
-      macos-x64: https://parallel-launcher.ca/latest/parallel-launcher-x86_64.dmg
+      win-x64:
+        url: https://parallel-launcher.ca/windows-releases/parallel-launcher-v9.0.6-windows64.zip
+        sha256: 91e847d25202ef7e854958f0fcbf8616c910842cce684a5391e6ae2597b03b46
+        size: 54341853
+      macos-x64:
+        url: https://parallel-launcher.ca/latest/parallel-launcher-x86_64.dmg
+        sha256: a32fe1f43be660d1a25ae4f5a4b3921034accfe9083971232f4b4e5709f97b78
+        size: 63301632
 preview: []
 nightly: []
