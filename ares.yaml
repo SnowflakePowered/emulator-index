@@ -2,11 +2,23 @@ name: ares
 stable:
   - version: v148
     assets:
-      win-x64: https://github.com/ares-emulator/ares/releases/download/v148/ares-windows-x64.zip
-      macos-arm64: https://github.com/ares-emulator/ares/releases/download/v148/ares-macos-universal.zip
+      win-x64:
+        url: https://github.com/ares-emulator/ares/releases/download/v148/ares-windows-x64.zip
+        sha256: fa97958e1d359e3fe254353f87b6508f2762a959d7eb264c69965ad002037298
+        size: 64799819
+      macos-arm64:
+        url: https://github.com/ares-emulator/ares/releases/download/v148/ares-macos-universal.zip
+        sha256: 1ae232ab6de341210f171f51d84b311527eb1399060706589334a8a7de136bb0
+        size: 79914130
 preview: []
 nightly:
   - version: 4cb8d92
     assets:
-      win-x64: https://github.com/ares-emulator/ares/releases/download/nightly/ares-windows-x64.zip
-      macos-arm64: https://github.com/ares-emulator/ares/releases/download/nightly/ares-macos-universal.zip
+      win-x64:
+        url: https://github.com/ares-emulator/ares/releases/download/nightly/ares-windows-x64.zip
+        sha256: 51fb7639f044e58cd1fb0bd1c2a3cda09ee96a480afa5884dbd64478b77bfbe5
+        size: 65248770
+      macos-arm64:
+        url: https://github.com/ares-emulator/ares/releases/download/nightly/ares-macos-universal.zip
+        sha256: 72f3148c367e3d05dcd490aef60cd96848292e42b95e65cac3da27ebae01b9ab
+        size: 80762850
