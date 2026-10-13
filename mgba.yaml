@@ -2,13 +2,31 @@ name: mgba
 stable:
   - version: 0.10.5
     assets:
-      win-x64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-win64.7z
-      macos-arm64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-macos.dmg
-      linux-x64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-appimage-x64.appimage
+      win-x64:
+        url: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-win64.7z
+        sha256: b497a57c7d9093834dadc64f33a90f7c411439c21fdb8a0143255a45ea37563a
+        size: 14156919
+      macos-arm64:
+        url: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-macos.dmg
+        sha256: 443b490ec728293dfcde1cb9db160f73d94c457cb1864f3ce0407e60e174b09c
+        size: 33363374
+      linux-x64:
+        url: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-appimage-x64.appimage
+        sha256: fdf0a5c1588e1606c38315735cf48a9f9dca3573f32a3947ebc956f8297e85cd
+        size: 25208000
 preview: []
 nightly:
   - version: 9155-143adf5
     assets:
-      win-x64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-win64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.7z
-      macos-arm64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-macos-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.dmg
-      linux-x64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-appimage-x64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.appimage
+      win-x64:
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-win64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.7z
+        sha256: b691a23b1df2c7e7642d717e7cb21d53cb7784887cf82ec2007290a1cf100f6e
+        size: 15759495
+      macos-arm64:
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-macos-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.dmg
+        sha256: 67b081147bcf0b49e501bd0a6312671606cdf2241d22d3c1f29da283c9044959
+        size: 35217262
+      linux-x64:
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-appimage-x64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.appimage
+        sha256: 2550ef0ca80f1d48fe9c1acbbfd394c4583bf3352232077bc861aea03bd89f4f
+        size: 27363832
