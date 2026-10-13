@@ -2,9 +2,21 @@ name: denise
 stable:
   - version: "2.9"
     assets:
-      win-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_win64_v2.9.zip
-      macos-arm64: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_arm64_v2.9.dmg.bz2
-      macos-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_x64_v2.9.dmg.bz2
-      linux-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_linux_v2.9.flatpak
+      win-x64:
+        url: https://github.com/piciji/denise/releases/download/v2.9/denise_win64_v2.9.zip
+        sha256: 47d296f77e6f8fa9469aec053ddca773ffcaf1cc68144bc9024a309eb41ba72b
+        size: 22450199
+      macos-arm64:
+        url: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_arm64_v2.9.dmg.bz2
+        sha256: 1c5731d80584930c838b172cfe3fc8fb083667b17e3180c2f61eeb8c8ea824b3
+        size: 20363609
+      macos-x64:
+        url: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_x64_v2.9.dmg.bz2
+        sha256: 07f3e28fadfdd9cc032d9d0de5efe89cfe0358909a4ea09c1e7d0dca0d293d3b
+        size: 20691152
+      linux-x64:
+        url: https://github.com/piciji/denise/releases/download/v2.9/denise_linux_v2.9.flatpak
+        sha256: b669c87868d47e0645fb6fecdda7d8105d3e5555d3b4584e4d47fe042723b6fc
+        size: 15848664
 preview: []
 nightly: []
