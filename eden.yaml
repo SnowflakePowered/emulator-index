@@ -1,0 +1,14 @@
+name: eden
+stable:
+  - version: 0.2.1
+    assets:
+      win-x64: https://stable.eden-emu.dev/v0.2.1/Eden-Windows-v0.2.1-amd64-clang-pgo.zip
+      macos-arm64: https://stable.eden-emu.dev/v0.2.1/Eden-macOS-v0.2.1.dmg
+      linux-x64: https://stable.eden-emu.dev/v0.2.1/Eden-Linux-v0.2.1-amd64-clang-pgo.AppImage
+preview: []
+nightly:
+  - version: 4dc69c06f7
+    assets:
+      win-x64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Windows-4dc69c06f7-amd64-clang-pgo.zip
+      macos-arm64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-macOS-4dc69c06f7.dmg
+      linux-x64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Linux-4dc69c06f7-amd64-clang-pgo.AppImage

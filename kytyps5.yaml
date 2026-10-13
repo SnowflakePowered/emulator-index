@@ -1,0 +1,9 @@
+name: kytyps5
+stable: []
+preview: []
+nightly:
+  - version: 2026-10-12-df5b9b9
+    assets:
+      win-x64: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-12-df5b9b9/KytyPS5-2026-10-12-df5b9b9-Windows-x64.zip
+      macos-x64: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-12-df5b9b9/KytyPS5-2026-10-12-df5b9b9-macOS-x86_64.zip
+      linux-x64: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-12-df5b9b9/KytyPS5-2026-10-12-df5b9b9-Linux-x86_64.tar.gz

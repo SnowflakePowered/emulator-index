@@ -1,0 +1,115 @@
+emulators:
+  azahar:
+    repository: https://github.com/azahar-emu/azahar
+    license: GPL-3.0
+  dolphin:
+    repository: https://github.com/dolphin-emu/dolphin
+    license: GPL-2.0-or-later
+  flycast:
+    repository: https://github.com/flyinghead/flycast
+    license: GPL-2.0
+  pcsx2:
+    repository: https://github.com/PCSX2/pcsx2
+    license: GPL-3.0-or-later
+  duckstation:
+    repository: https://github.com/stenzek/duckstation
+    license: CC-BY-NC-ND-4.0
+  mgba:
+    repository: https://github.com/mgba-emu/mgba
+    license: MPL-2.0
+  rpcs3:
+    repository: https://github.com/RPCS3/rpcs3
+    license: GPL-2.0
+  vita3k:
+    repository: https://github.com/Vita3K/Vita3K
+    license: GPL-2.0
+  cxbx-reloaded:
+    repository: https://github.com/Cxbx-Reloaded/Cxbx-Reloaded
+    license: GPL-2.0
+  xemu:
+    repository: https://github.com/xemu-project/xemu
+    license: GPL-2.0
+  xenia-edge:
+    repository: https://github.com/has207/xenia-edge
+    license: BSD-3-Clause
+  ymir:
+    repository: https://github.com/ymir-emu/Ymir
+    license: GPL-3.0
+  ares:
+    repository: https://github.com/ares-emulator/ares
+    license: ISC
+  retroarch:
+    repository: https://github.com/libretro/RetroArch
+    license: GPL-3.0
+  ppsspp:
+    repository: https://github.com/hrydgard/ppsspp
+    license: GPL-2.0-or-later
+  melonds:
+    repository: https://github.com/melonDS-emu/melonDS
+    license: GPL-3.0
+  cemu:
+    repository: https://github.com/cemu-project/Cemu
+    license: MPL-2.0
+  mupen64plus:
+    repository: https://github.com/mupen64plus/mupen64plus-core
+    license: GPL-2.0-or-later
+  parallel-launcher:
+    repository: https://gitlab.com/parallel-launcher/parallel-launcher
+    license: GPL-3.0
+  eden:
+    repository: https://git.eden-emu.dev/eden-emu/eden
+    license: GPL-3.0-or-later
+  bizhawk:
+    repository: https://github.com/TASEmulators/BizHawk
+    license: MIT
+  bigpemu:
+    repository: https://www.richwhitehouse.com/jaguar/
+    license: Proprietary
+  shadps4:
+    repository: https://github.com/shadps4-emu/shadPS4
+    license: GPL-2.0
+  dosbox-staging:
+    repository: https://github.com/dosbox-staging/dosbox-staging
+    license: GPL-2.0-or-later
+  dosbox-x:
+    repository: https://github.com/joncampbell123/dosbox-x
+    license: GPL-2.0
+  86box:
+    repository: https://github.com/86Box/86Box
+    license: GPL-2.0
+  gopher64:
+    repository: https://github.com/gopher64/gopher64
+    license: GPL-3.0
+  kytyps5:
+    repository: https://github.com/KytyPS5/KytyPS5
+    license: GPL-2.0
+  mesen-ce:
+    repository: https://github.com/nesdev-org/MesenCE
+    license: GPL-3.0
+  vba-m:
+    repository: https://github.com/visualboyadvance-m/visualboyadvance-m
+    license: GPL-2.0
+  sameboy:
+    repository: https://github.com/LIJI32/SameBoy
+    license: MIT
+  denise:
+    repository: https://github.com/piciji/denise
+    license: GPL-3.0-or-later
+  winuae:
+    repository: https://github.com/tonioni/WinUAE
+    license: GPL-2.0-or-later
+  mednafen:
+    repository: https://mednafen.github.io/
+    license: GPL-2.0
+  mame:
+    repository: https://github.com/mamedev/mame
+    license: GPL-2.0-or-later
+  fbneo:
+    repository: https://github.com/finalburnneo/FBNeo
+    license: Custom non-commercial
+  stella:
+    repository: https://github.com/stella-emu/stella
+    license: GPL-2.0
+  altirra:
+    repository: https://www.virtualdub.org/altirra.html
+    license: GPL-2.0

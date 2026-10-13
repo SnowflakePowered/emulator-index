@@ -1,0 +1,47 @@
+name: update-parallel-launcher
+
+on:
+  schedule:
+    - cron: "30 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  SITE: https://parallel-launcher.ca
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Parallel Launcher publishes releases on its website, not as GitLab
+      # release assets. stable is the Windows build linked from the download
+      # page; history is kept, newest first. The only macOS download is the
+      # rolling latest/ x86_64 dmg (unversioned, so it always points at the
+      # newest release). Linux is distributed as distro packages, so there is
+      # no linux-x64 key. There is no preview or nightly channel.
+      - name: Update stable
+        run: |
+          file=$(curl -fsSL "$SITE/" | grep -oE 'windows-releases/parallel-launcher-v[0-9.]+-windows64[.]zip' | head -1)
+          [ -n "$file" ] || { echo "download link not found"; exit 1; }
+          version=$(sed -E 's|.*-v([0-9.]+)-windows64[.]zip|\1|' <<<"$file")
+
+          entry=$(jq -nc --arg v "$version" --arg site "$SITE" --arg url "$SITE/$file" '{version: $v, assets: {"win-x64": $url, "macos-x64": ($site + "/latest/parallel-launcher-x86_64.dmg")}}')
+          ENTRY=$entry VER=$version yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' parallel-launcher.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- parallel-launcher.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add parallel-launcher.yaml
+          git commit -m "parallel-launcher: update releases"
+          git push

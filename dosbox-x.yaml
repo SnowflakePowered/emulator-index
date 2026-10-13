@@ -1,0 +1,15 @@
+name: dosbox-x
+stable:
+  - version: 2026.10.01
+    assets:
+      win-x64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-vsbuild-win64-2026.10.01-portable.zip
+      macos-arm64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-arm64-2026.10.01.zip
+      macos-x64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-x86_64-2026.10.01.zip
+preview: []
+nightly:
+  - version: 378e6f8
+    assets:
+      win-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11666590251.zip
+      macos-arm64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667255892.zip
+      macos-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667057751.zip
+      linux-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667265696.zip

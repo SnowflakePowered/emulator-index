@@ -1,0 +1,70 @@
+name: update-vba-m
+
+on:
+  schedule:
+    - cron: "15 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: visualboyadvance-m/visualboyadvance-m
+  NIGHTLY: https://nightly.visualboyadvance-m.org
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = the rolling builds on nightly.visualboyadvance-m.org. The
+      #           files keep the same names, so the version is the date the
+      #           Windows build was uploaded. Only the newest is kept.
+      # VBA-M publishes no Linux binaries, and has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("^visualboyadvance-m-Win-x86_64[.]zip$"),
+                "macos-arm64": asset("^visualboyadvance-m-Mac-ARM64[.]zip$"),
+                "macos-x64":   asset("^visualboyadvance-m-Mac-x86_64[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' vba-m.yaml
+
+      - name: Update nightly
+        run: |
+          modified=$(curl -fsSI "$NIGHTLY/visualboyadvance-m-Win-x86_64.zip" | tr -d '\r' | sed -n 's/^[Ll]ast-[Mm]odified: *//p')
+          [ -n "$modified" ] || exit 0
+          version=$(date -u -d "$modified" +%Y-%m-%d)
+
+          assets=$(
+            for spec in "win-x64 visualboyadvance-m-Win-x86_64.zip" \
+                        "macos-arm64 visualboyadvance-m-Mac-ARM64.zip" \
+                        "macos-x64 visualboyadvance-m-Mac-x86_64.zip"; do
+              set -- $spec
+              if curl -fsI -o /dev/null "$NIGHTLY/$2"; then echo "$1 $NIGHTLY/$2"; fi
+            done | jq -Rn '[inputs | split(" ") | {(.[0]): .[1]}] | add // {}')
+
+          entry=$(jq -nc --arg v "$version" --argjson a "$assets" '{version: $v, assets: $a}')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' vba-m.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- vba-m.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vba-m.yaml
+          git commit -m "vba-m: update releases"
+          git push

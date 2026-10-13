@@ -1,0 +1,12 @@
+name: fbneo
+stable:
+  - version: 1.0.0.2
+    assets:
+      win-x64: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/fbneo.zip
+      macos-x64: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/FinalBurnNeo-v1.0.0.2.dmg
+preview: []
+nightly:
+  - version: "2832940"
+    assets:
+      win-x64: https://github.com/finalburnneo/FBNeo/releases/download/latest/windows-x86_64.zip
+      linux-x64: https://github.com/finalburnneo/FBNeo/releases/download/latest/linux-sdl2-x86_64.zip

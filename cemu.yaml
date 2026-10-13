@@ -1,0 +1,15 @@
+name: cemu
+stable:
+  - version: "2.6"
+    assets:
+      win-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-windows-x64.zip
+      macos-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/cemu-2.6-macos-12-x64.dmg
+      linux-x64: https://github.com/cemu-project/Cemu/releases/download/v2.6/Cemu-2.6-x86_64.AppImage
+preview: []
+nightly:
+  - version: 540487b
+    assets:
+      win-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782586898.zip
+      macos-arm64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782407081.zip
+      macos-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782820782.zip
+      linux-x64: https://nightly.link/cemu-project/Cemu/actions/artifacts/11782890485.zip

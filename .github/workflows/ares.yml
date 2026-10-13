@@ -1,0 +1,59 @@
+name: update-ares
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: ares-emulator/ares
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest tagged release (vNNN); history is kept, newest first.
+      # nightly = the rolling "nightly" release. The tag never changes, so the
+      #           version is the short sha of the commit it points at. Only
+      #           the newest is kept.
+      # ares has no preview channel and no Linux binaries.
+      - name: Update stable and nightly
+        run: |
+          release_entry='
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: $version,
+              assets: ({
+                "win-x64":     asset("^ares-windows-x64[.]zip$"),
+                "macos-arm64": asset("^ares-macos-universal[.]zip$")
+              } | with_entries(select(.value != null)))
+            }'
+
+          stable_json=$(gh api "repos/$REPO/releases/latest")
+          stable=$(jq -c --arg version "$(jq -r .tag_name <<<"$stable_json")" "$release_entry" <<<"$stable_json")
+
+          sha=$(gh api "repos/$REPO/commits/nightly" --jq .sha)
+          nightly=$(gh api "repos/$REPO/releases/tags/nightly" | jq -c --arg version "${sha:0:7}" "$release_entry")
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' ares.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' ares.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- ares.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ares.yaml
+          git commit -m "ares: update releases"
+          git push

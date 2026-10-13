@@ -1,0 +1,57 @@
+name: update-pcsx2
+
+on:
+  schedule:
+    - cron: "45 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: PCSX2/pcsx2
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest non-prerelease release; history is kept, newest first.
+      # nightly = latest prerelease (PCSX2 publishes its dev builds as
+      #           prereleases); only the newest is kept.
+      # PCSX2 has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          release_entry='
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("-windows-x64-Qt[.]7z$"),
+                "macos-arm64": asset("-macos-Qt[.]tar[.]xz$"),
+                "linux-x64":   asset("-linux-appimage-x64-Qt[.]AppImage$")
+              } | with_entries(select(.value != null)))
+            }'
+
+          stable=$(gh api "repos/$REPO/releases/latest" | jq -c "$release_entry")
+          nightly=$(gh api "repos/$REPO/releases?per_page=30" \
+            | jq -c "[.[] | select(.prerelease and (.draft | not))] | first | $release_entry")
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' pcsx2.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' pcsx2.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- pcsx2.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pcsx2.yaml
+          git commit -m "pcsx2: update releases"
+          git push

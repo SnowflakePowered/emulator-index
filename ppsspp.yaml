@@ -1,0 +1,14 @@
+name: ppsspp
+stable:
+  - version: 1.20.4
+    assets:
+      win-x64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-Windows-x64.zip
+      macos-arm64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPPSDL-macOS-v1.20.4.zip
+      linux-x64: https://github.com/hrydgard/ppsspp/releases/download/v1.20.4/PPSSPP-v1.20.4-anylinux-x86_64.AppImage
+preview: []
+nightly:
+  - version: v1.20.4-2960-g709e2ac277d9
+    assets:
+      win-x64: https://builds.ppsspp.org/builds/v1.20.4-2960-g709e2ac277d9/ppsspp_win_v1.20.4-2960-g709e2ac277d9.zip
+      macos-arm64: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11816149872.zip
+      linux-x64: https://nightly.link/hrydgard/ppsspp/actions/artifacts/11815828340.zip

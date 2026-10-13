@@ -1,0 +1,7 @@
+name: cxbx-reloaded
+stable: []
+preview: []
+nightly:
+  - version: 585c49a
+    assets:
+      win-x86: https://github.com/Cxbx-Reloaded/Cxbx-Reloaded/releases/download/CI-585c49a/CxbxReloaded-Release.zip

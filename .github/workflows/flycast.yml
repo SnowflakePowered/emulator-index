@@ -1,0 +1,86 @@
+name: update-flycast
+
+on:
+  schedule:
+    - cron: "30 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: flyinghead/flycast
+  BUCKET: https://flycast-builds.s3.fr-par.scw.cloud
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable: latest GitHub release; history is kept, newest first.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("^flycast-win64-.*[.]zip$"),
+                "macos-arm64": asset("^flycast-macOS-.*[.]zip$"),
+                "linux-x64":   asset("[.]AppImage$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' flycast.yaml
+
+      # preview: newest master build on the CI bucket (the one behind
+      # flyinghead.github.io/flycast-builds).
+      # nightly: newest dev build on the same bucket.
+      # Only the newest build with every platform present is kept for each.
+      - name: Update preview and nightly
+        run: |
+          list() { # branch, platform prefix, file name
+            curl -fsSL "$BUCKET/?prefix=$2/heads/$1-&max-keys=1000" | yq -p=xml -o=json '.'               | jq -c --arg bucket "$BUCKET" --arg branch "$1" --arg file "$3" '
+                  .ListBucketResult
+                  | if (.IsTruncated | tostring) == "true" then error("bucket listing truncated") else . end
+                  | [.Contents // empty | if type == "array" then .[] else . end
+                     | select(.Key | test("/heads/" + $branch + "-[0-9a-f]{40}/" + $file + "$"))
+                     | {commit: (.Key | capture("-(?<c>[0-9a-f]{40})/").c),
+                        modified: .LastModified,
+                        url: "\($bucket)/\(.Key)"}]'
+          }
+
+          branch_entry() { # branch
+            win=$(list "$1" win flycast.zip)
+            linux=$(list "$1" linux flycast-x86_64.AppImage)
+            osx=$(list "$1" osx flycast.app.zip)
+            jq -nc --argjson w "$win" --argjson l "$linux" --argjson o "$osx" '
+              [$w[] | select(.commit as $c | any($l[]; .commit == $c) and any($o[]; .commit == $c))]
+              | max_by(.modified) | .commit as $c
+              | {
+                  version: $c[0:7],
+                  assets: {
+                    "win-x64":     .url,
+                    "macos-arm64": ($o[] | select(.commit == $c) | .url),
+                    "linux-x64":   ($l[] | select(.commit == $c) | .url)
+                  }
+                }'
+          }
+
+          ENTRY=$(branch_entry master) yq -i -P '.preview = [env(ENTRY)]' flycast.yaml
+          ENTRY=$(branch_entry dev) yq -i -P '.nightly = [env(ENTRY)]' flycast.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- flycast.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add flycast.yaml
+          git commit -m "flycast: update releases"
+          git push

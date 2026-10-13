@@ -1,0 +1,89 @@
+name: update-ppsspp
+
+on:
+  schedule:
+    - cron: "30 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: hrydgard/ppsspp
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = newest development build on builds.ppsspp.org (the data
+      #           behind ppsspp.org/devbuilds), which only publishes Windows
+      #           builds. The macOS and Linux builds come from the GitHub
+      #           Actions artifacts of the CI runs for that same commit,
+      #           linked through nightly.link. Only the newest is kept.
+      # PPSSPP has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("-Windows-x64[.]zip$"),
+                "macos-arm64": asset("^PPSSPPSDL-macOS-.*[.]zip$"),
+                "linux-x64":   asset("-anylinux-x86_64[.]AppImage$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' ppsspp.yaml
+
+      - name: Update nightly
+        run: |
+          status=$(curl -fsSL https://builds.ppsspp.org/meta/status.json)
+          sha=$(jq -r .latest.hash <<<"$status")
+
+          # Artifact of the CI run for the same commit, via nightly.link.
+          # Prints nothing if the run or the artifact is not available.
+          ci_artifact() { # workflow file, artifact name regex
+            run=$(gh api "repos/$REPO/actions/workflows/$1/runs?head_sha=$sha&status=success&per_page=1"               --jq '.workflow_runs[0].id // empty')
+            [ -n "$run" ] || return 0
+            gh api "repos/$REPO/actions/runs/$run/artifacts?per_page=100"               | jq -r --arg re "$2" '[.artifacts[] | select((.expired | not) and (.name | test($re))) | .id] | first // empty'
+          }
+          nightly_link() { [ -z "$1" ] || echo "https://nightly.link/$REPO/actions/artifacts/$1.zip"; }
+
+          linux=$(nightly_link "$(ci_artifact appimage.yml '-x86_64 AppImage$')")
+          macos=$(nightly_link "$(ci_artifact build.yml '^macos-latest build$')")
+
+          # Windows comes from builds.ppsspp.org (the data behind ppsspp.org/devbuilds)
+          entry=$(jq -c --arg linux "$linux" --arg macos "$macos" '
+            .latest
+            | .description as $d
+            | {
+                version: $d,
+                assets: ({
+                  "win-x64": ([.builds.Windows[]? | select(test("^ppsspp_win_.*[.]zip$"))] | first
+                              | if . then "https://builds.ppsspp.org/builds/\($d)/\(.)" else null end),
+                  "macos-arm64": (if $macos != "" then $macos else null end),
+                  "linux-x64":   (if $linux != "" then $linux else null end)
+                } | with_entries(select(.value != null)))
+              }' <<<"$status")
+          # skip if the newest build has not been published yet
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' ppsspp.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- ppsspp.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ppsspp.yaml
+          git commit -m "ppsspp: update releases"
+          git push

@@ -1,0 +1,61 @@
+name: update-xemu
+
+on:
+  schedule:
+    - cron: "15 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: xemu-project/xemu
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest tagged release; history is kept, newest first.
+      # nightly = the rolling "pre-release" release ("Latest Development
+      #           Build"); only the newest is kept.
+      # xemu has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          release_entry='
+            # debug builds and symbol packages are not wanted; prefer the
+            # signed macOS build over the unsigned one when both exist
+            [.assets[] | select(.name | test("-dbg-|-pdb[.]") | not)] as $a
+            | def asset($re): [$a[] | select(.name | test($re))] | sort_by(.name | test("unsigned")) | first | .browser_download_url;
+              ($a[] | select(.name | test("^xemu-.+-windows-x86_64[.]zip$")) | .name
+                    | capture("^xemu-(?<v>.+)-windows-x86_64[.]zip$").v) as $version
+            | {
+                version: $version,
+                assets: ({
+                  "win-x64":     asset("-windows-x86_64[.]zip$"),
+                  "macos-arm64": asset("-macos-universal(-unsigned)?[.]zip$"),
+                  "linux-x64":   asset("-x86_64[.]AppImage$")
+                } | with_entries(select(.value != null)))
+              }'
+
+          stable=$(gh api "repos/$REPO/releases/latest" | jq -c "$release_entry")
+          nightly=$(gh api "repos/$REPO/releases/tags/pre-release" | jq -c "$release_entry")
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' xemu.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' xemu.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- xemu.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add xemu.yaml
+          git commit -m "xemu: update releases"
+          git push

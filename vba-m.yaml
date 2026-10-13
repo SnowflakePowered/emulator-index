@@ -1,0 +1,14 @@
+name: vba-m
+stable:
+  - version: 2.2.3
+    assets:
+      win-x64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Win-x86_64.zip
+      macos-arm64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-ARM64.zip
+      macos-x64: https://github.com/visualboyadvance-m/visualboyadvance-m/releases/download/v2.2.3/visualboyadvance-m-Mac-x86_64.zip
+preview: []
+nightly:
+  - version: "2026-10-12"
+    assets:
+      win-x64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Win-x86_64.zip
+      macos-arm64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-ARM64.zip
+      macos-x64: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-x86_64.zip

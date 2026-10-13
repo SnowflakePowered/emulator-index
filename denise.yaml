@@ -1,0 +1,10 @@
+name: denise
+stable:
+  - version: "2.9"
+    assets:
+      win-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_win64_v2.9.zip
+      macos-arm64: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_arm64_v2.9.dmg.bz2
+      macos-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_macos_x64_v2.9.dmg.bz2
+      linux-x64: https://github.com/piciji/denise/releases/download/v2.9/denise_linux_v2.9.flatpak
+preview: []
+nightly: []

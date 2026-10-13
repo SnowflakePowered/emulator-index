@@ -1,0 +1,19 @@
+name: flycast
+stable:
+  - version: "2.7"
+    assets:
+      win-x64: https://github.com/flyinghead/flycast/releases/download/v2.7/flycast-win64-2.7.zip
+      macos-arm64: https://github.com/flyinghead/flycast/releases/download/v2.7/flycast-macOS-2.7.zip
+      linux-x64: https://github.com/flyinghead/flycast/releases/download/v2.7/flycast-x86_64-2.7.AppImage
+preview:
+  - version: 80471d5
+    assets:
+      win-x64: https://flycast-builds.s3.fr-par.scw.cloud/win/heads/master-80471d57b02606f53828daa916de6ecc94ca1877/flycast.zip
+      macos-arm64: https://flycast-builds.s3.fr-par.scw.cloud/osx/heads/master-80471d57b02606f53828daa916de6ecc94ca1877/flycast.app.zip
+      linux-x64: https://flycast-builds.s3.fr-par.scw.cloud/linux/heads/master-80471d57b02606f53828daa916de6ecc94ca1877/flycast-x86_64.AppImage
+nightly:
+  - version: 7422d1b
+    assets:
+      win-x64: https://flycast-builds.s3.fr-par.scw.cloud/win/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast.zip
+      macos-arm64: https://flycast-builds.s3.fr-par.scw.cloud/osx/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast.app.zip
+      linux-x64: https://flycast-builds.s3.fr-par.scw.cloud/linux/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast-x86_64.AppImage

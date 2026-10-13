@@ -1,0 +1,72 @@
+name: update-mgba
+
+on:
+  schedule:
+    - cron: "15 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: mgba-emu/mgba
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable: latest GitHub release; history is kept, newest first.
+      # mGBA has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: .tag_name,
+              assets: ({
+                "win-x64":     asset("-win64[.]7z$"),
+                "macos-arm64": asset("-macos[.]dmg$"),
+                "linux-x64":   asset("-appimage-x64[.]appimage$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' mgba.yaml
+
+      # nightly: newest revision of the development builds (the output of
+      # buildbot.mgba.io, published at mgba.io/builds). Each revision has
+      # permanent S3 URLs. Only the newest revision is kept.
+      - name: Update nightly
+        run: |
+          entry=$(curl -fsSL https://mgba.io/builds/1/ \
+            | grep -oE 'https://s3[.]amazonaws[.]com/mgba/build/mGBA-build-[0-9]{4}-[0-9]{2}-[0-9]{2}-(win64|macos|appimage-x64)-[0-9]+-[0-9a-f]{40}[.](7z|dmg|appimage)' \
+            | sort -u \
+            | jq -Rn '
+                [inputs | . as $u
+                 | capture("-(?<p>win64|macos|appimage-x64)-(?<rev>[0-9]+)-(?<sha>[0-9a-f]{40})[.][a-z0-9]+$")
+                 | . + {url: $u, rev: (.rev | tonumber)}]
+                | if length == 0 then error("no builds found") else . end
+                | (map(.rev) | max) as $m
+                | map(select(.rev == $m)) as $b
+                | {
+                    version: "\($m)-\($b[0].sha[0:7])",
+                    assets: ($b | map({(.p): .url}) | add
+                             | {"win-x64": .win64, "macos-arm64": .macos, "linux-x64": ."appimage-x64"}
+                             | with_entries(select(.value != null)))
+                  }')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' mgba.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- mgba.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mgba.yaml
+          git commit -m "mgba: update releases"
+          git push

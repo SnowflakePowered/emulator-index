@@ -1,0 +1,19 @@
+name: duckstation
+stable:
+  - version: v0.1-11894
+    assets:
+      win-x64: https://github.com/stenzek/duckstation/releases/download/v0.1-11894/duckstation-windows-x64-release.zip
+      macos-arm64: https://github.com/stenzek/duckstation/releases/download/v0.1-11894/duckstation-mac-release.zip
+      linux-x64: https://github.com/stenzek/duckstation/releases/download/v0.1-11894/DuckStation-x64.AppImage
+preview:
+  - version: "00e2997"
+    assets:
+      win-x64: https://github.com/stenzek/duckstation/releases/download/latest/duckstation-windows-x64-release.zip
+      macos-arm64: https://github.com/stenzek/duckstation/releases/download/latest/duckstation-mac-release.zip
+      linux-x64: https://github.com/stenzek/duckstation/releases/download/latest/DuckStation-x64.AppImage
+nightly:
+  - version: a6f0faa
+    assets:
+      win-x64: https://github.com/stenzek/duckstation/releases/download/preview/duckstation-windows-x64-release.zip
+      macos-arm64: https://github.com/stenzek/duckstation/releases/download/preview/duckstation-mac-release.zip
+      linux-x64: https://github.com/stenzek/duckstation/releases/download/preview/DuckStation-x64.AppImage

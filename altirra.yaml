@@ -1,0 +1,7 @@
+name: altirra
+stable:
+  - version: "4.40"
+    assets:
+      win-x64: https://www.virtualdub.org/downloads/Altirra-4.40.zip
+preview: []
+nightly: []

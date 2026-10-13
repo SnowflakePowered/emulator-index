@@ -1,0 +1,8 @@
+name: sameboy
+stable:
+  - version: 1.0.4
+    assets:
+      win-x64: https://github.com/LIJI32/SameBoy/releases/download/v1.0.4/sameboy_winsdl_v1.0.4.zip
+      macos-arm64: https://github.com/LIJI32/SameBoy/releases/download/v1.0.4/sameboy_cocoa_v1.0.4.zip
+preview: []
+nightly: []

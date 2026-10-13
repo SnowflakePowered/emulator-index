@@ -1,0 +1,49 @@
+name: update-vita3k
+
+on:
+  schedule:
+    - cron: "45 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: Vita3K/Vita3K
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Vita3K only publishes the rolling "continuous" release, so only
+      # nightly is filled in. The tag never changes, so the version is the
+      # short sha of the commit it points at. Only the newest is kept.
+      - name: Update nightly
+        run: |
+          sha=$(gh api "repos/$REPO/commits/continuous" --jq .sha)
+          entry=$(gh api "repos/$REPO/releases/tags/continuous" | jq -c --arg version "${sha:0:7}" '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: $version,
+              assets: ({
+                "win-x64":     asset("^windows-latest[.]zip$"),
+                "macos-arm64": asset("^macos-arm64-latest[.]dmg$"),
+                "linux-x64":   asset("^Vita3K-x86_64[.]AppImage$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' vita3k.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- vita3k.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vita3k.yaml
+          git commit -m "vita3k: update releases"
+          git push

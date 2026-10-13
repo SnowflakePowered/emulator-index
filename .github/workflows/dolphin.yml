@@ -1,0 +1,52 @@
+name: update-dolphin
+
+on:
+  schedule:
+    - cron: "15 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Dolphin publishes through dolphin-emu.org rather than GitHub releases.
+      # stable  = "beta" channel (tagged releases, e.g. 2609a); history is kept.
+      # nightly = "dev" channel (latest master build); only the newest is kept.
+      # Dolphin has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          entry_filter='
+            def asset($s): [.artifacts[] | select(.system == $s) | .url] | first;
+            {
+              version: .shortrev,
+              assets: ({
+                "win-x64":      asset("Windows x64"),
+                "macos-arm64":  asset("macOS (ARM/Intel Universal)"),
+                "linux-x64":  asset("Linux x86_64 (Flatpak)")
+              } | with_entries(select(.value != null)))
+            }'
+
+          stable=$(curl -fsSL https://dolphin-emu.org/update/latest/beta | jq -c "$entry_filter")
+          nightly=$(curl -fsSL https://dolphin-emu.org/update/latest/dev | jq -c "$entry_filter")
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' dolphin.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' dolphin.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- dolphin.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dolphin.yaml
+          git commit -m "dolphin: update releases"
+          git push

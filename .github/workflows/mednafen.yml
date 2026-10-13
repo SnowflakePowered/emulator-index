@@ -1,0 +1,47 @@
+name: update-mednafen
+
+on:
+  schedule:
+    - cron: "15 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  SITE: https://mednafen.github.io
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Mednafen has no public repository for releases and only publishes
+      # tagged versions on its website, so only stable is filled in (the
+      # highest version listed; history is kept, newest first). There is no
+      # macOS or Linux binary (source only), and no preview or nightly channel.
+      - name: Update stable
+        run: |
+          version=$(curl -fsSL "$SITE/releases/" \
+            | grep -oE 'files/mednafen-[0-9]+([.][0-9]+)+-win64[.]zip' | grep -oE '[0-9]+([.][0-9]+)+' \
+            | sort -V | tail -1)
+          [ -n "$version" ] || { echo "download link not found"; exit 1; }
+
+          entry=$(jq -nc --arg v "$version" --arg url "$SITE/releases/files/mednafen-$version-win64.zip" \
+            '{version: $v, assets: {"win-x64": $url}}')
+          ENTRY=$entry VER=$version yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' mednafen.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- mednafen.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mednafen.yaml
+          git commit -m "mednafen: update releases"
+          git push

@@ -1,0 +1,13 @@
+name: mupen64plus
+stable:
+  - version: 2.6.0
+    assets:
+      win-x64: https://github.com/mupen64plus/mupen64plus-core/releases/download/2.6.0/mupen64plus-bundle-win64-2.6.0.zip
+      macos-x64: https://github.com/mupen64plus/mupen64plus-core/releases/download/2.6.0/mupen64plus-bundle-osx-2.6.0.zip
+      linux-x64: https://github.com/mupen64plus/mupen64plus-core/releases/download/2.6.0/mupen64plus-bundle-linux64-2.6.0.tar.gz
+preview: []
+nightly:
+  - version: ba95bab
+    assets:
+      win-x64: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-msvc-x64-gba95bab.zip
+      linux-x64: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-linux-x64-gba95bab.tar.gz

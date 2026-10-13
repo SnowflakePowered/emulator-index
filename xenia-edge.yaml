@@ -1,0 +1,9 @@
+name: xenia-edge
+stable: []
+preview: []
+nightly:
+  - version: 06c98e2
+    assets:
+      win-x64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_windows.zip
+      macos-arm64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_macos.dmg
+      linux-x64: https://github.com/has207/xenia-edge/releases/download/06c98e2/xenia_edge_linux.AppImage

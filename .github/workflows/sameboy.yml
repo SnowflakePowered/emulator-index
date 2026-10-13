@@ -1,0 +1,49 @@
+name: update-sameboy
+
+on:
+  schedule:
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: LIJI32/SameBoy
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # SameBoy only publishes tagged releases (its CI builds no desktop
+      # binaries), so only stable is filled in; history is kept, newest first.
+      # There is no Linux binary, and no preview or nightly channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("^sameboy_winsdl_.*[.]zip$"),
+                "macos-arm64": asset("^sameboy_cocoa_.*[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' sameboy.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- sameboy.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sameboy.yaml
+          git commit -m "sameboy: update releases"
+          git push

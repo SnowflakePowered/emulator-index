@@ -1,0 +1,14 @@
+name: shadps4
+stable:
+  - version: 0.19.0
+    assets:
+      win-x64: https://github.com/shadps4-emu/shadPS4/releases/download/v.0.19.0/shadps4-win64-sdl-0.19.0.zip
+      macos-arm64: https://github.com/shadps4-emu/shadPS4/releases/download/v.0.19.0/shadps4-macos-sdl-0.19.0.zip
+      linux-x64: https://github.com/shadps4-emu/shadPS4/releases/download/v.0.19.0/shadps4-linux-sdl-0.19.0.zip
+preview: []
+nightly:
+  - version: 2026-10-12-23c4133
+    assets:
+      win-x64: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-12-23c41333822fe8eca4c609b43119180af63ae4ac/shadps4-win64-sdl-2026-10-12-23c4133.zip
+      macos-arm64: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-12-23c41333822fe8eca4c609b43119180af63ae4ac/shadps4-macos-sdl-2026-10-12-23c4133.zip
+      linux-x64: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-12-23c41333822fe8eca4c609b43119180af63ae4ac/shadps4-linux-sdl-2026-10-12-23c4133.zip

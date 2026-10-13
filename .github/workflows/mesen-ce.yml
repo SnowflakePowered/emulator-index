@@ -1,0 +1,76 @@
+name: update-mesen-ce
+
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  # SourMesen/Mesen2 is archived; nesdev-org/MesenCE is its maintained continuation
+  REPO: nesdev-org/MesenCE
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = artifacts of the newest successful push to master, linked
+      #           through nightly.link (Windows native AoT build, Linux
+      #           AppImage, macOS native AoT builds). Only the newest is kept.
+      # Mesen has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: .tag_name,
+              assets: ({
+                "win-x64":     asset("^Mesen_[0-9.]+_Windows[.]zip$"),
+                "macos-arm64": asset("_macOS_ARM64_AppleSilicon[.]zip$"),
+                "macos-x64":   asset("_macOS_x64_Intel[.]zip$"),
+                "linux-x64":   asset("_Linux_x64[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' mesen-ce.yaml
+
+      - name: Update nightly
+        run: |
+          read -r run sha <<<"$(gh api "repos/$REPO/actions/workflows/build.yml/runs?branch=master&event=push&status=success&per_page=1" \
+            --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"')"
+          [ -n "$run" ] || exit 0
+
+          entry=$(gh api "repos/$REPO/actions/runs/$run/artifacts?per_page=100" | jq -c --arg sha "${sha:0:7}" --arg repo "$REPO" '
+            [.artifacts[] | select(.expired | not)] as $a
+            | def url($n): [$a[] | select(.name == $n) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first;
+              {
+                version: $sha,
+                assets: ({
+                  "win-x64":     url("Mesen (Windows - net10.0 - AoT)"),
+                  "macos-arm64": url("Mesen (macOS - macos-15 - clang_aot)"),
+                  "macos-x64":   url("Mesen (macOS - macos-15-intel - clang_aot)"),
+                  "linux-x64":   url("Mesen (Linux x64 - AppImage)")
+                } | with_entries(select(.value != null)))
+              }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' mesen-ce.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- mesen-ce.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mesen-ce.yaml
+          git commit -m "mesen-ce: update releases"
+          git push

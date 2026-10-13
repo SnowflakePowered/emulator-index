@@ -1,0 +1,16 @@
+name: ymir
+stable:
+  - version: 0.3.3
+    assets:
+      win-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-windows-x86_64-AVX2-v0.3.3.zip
+      macos-arm64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-arm64-v0.3.3.zip
+      macos-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-macos-x64-v0.3.3.zip
+      linux-x64: https://github.com/ymir-emu/Ymir/releases/download/v0.3.3/ymir-linux-x86_64-AVX2-v0.3.3.tar.xz
+preview: []
+nightly:
+  - version: 0.4.0-dev_839aef3b
+    assets:
+      win-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-windows-x86_64-AVX2-v0.4.0-dev_839aef3b.zip
+      macos-arm64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-arm64-v0.4.0-dev_839aef3b.zip
+      macos-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-x64-v0.4.0-dev_839aef3b.zip
+      linux-x64: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-linux-x86_64-AVX2-v0.4.0-dev_839aef3b.tar.xz

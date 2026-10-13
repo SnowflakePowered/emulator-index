@@ -1,0 +1,75 @@
+name: build-pages
+
+# Builds a GitHub Pages site containing one aggregate JSON (index.json) made
+# from index.yaml plus every <emulator>.yaml.
+#
+# The update-* workflows commit with the default GITHUB_TOKEN, and pushes made
+# with that token do not trigger other workflows. So instead of reacting to
+# those commits, this runs on a schedule after the last update-* workflow
+# (they run between 06:00 and 15:15 UTC), as well as on manual edits.
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "*.yaml"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  CNAME: emulator-index.snowflakepowe.red
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build aggregate JSON
+        run: |
+          mkdir -p site
+
+          # index.yaml: repository + license per emulator
+          yq -o=json '.emulators' index.yaml > emulators.json
+
+          # <emulator>.yaml: stable / preview / nightly per emulator
+          for key in $(yq '.emulators | keys | .[]' index.yaml); do
+            [ -f "$key.yaml" ] || { echo "missing $key.yaml"; exit 1; }
+            yq -o=json "$key.yaml" | jq -c --arg k "$key" '{($k): {stable, preview, nightly}}'
+          done | jq -s 'add' > channels.json
+
+          jq -n --slurpfile idx emulators.json --slurpfile ch channels.json --arg now "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '
+            {
+              schema_version: 1,
+              generated_at: $now,
+              emulators: ($idx[0] | with_entries(.value += $ch[0][.key]))
+            }' > site/index.json
+
+          echo "$CNAME" > site/CNAME
+          touch site/.nojekyll
+          jq '.emulators | length' site/index.json
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

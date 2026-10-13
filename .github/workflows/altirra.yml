@@ -1,0 +1,47 @@
+name: update-altirra
+
+on:
+  schedule:
+    - cron: "15 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  SITE: https://www.virtualdub.org
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Altirra has no public repository for releases and only publishes
+      # tagged versions on its website, so only stable is filled in (the
+      # highest version listed; history is kept, newest first). It is a
+      # Windows-only program with no preview or nightly channel.
+      - name: Update stable
+        run: |
+          version=$(curl -fsSL "$SITE/altirra.html" \
+            | grep -oE 'downloads/Altirra-[0-9]+[.][0-9]+[.]zip' | grep -oE '[0-9]+[.][0-9]+' \
+            | sort -V | tail -1)
+          [ -n "$version" ] || { echo "download link not found"; exit 1; }
+
+          entry=$(jq -nc --arg v "$version" --arg url "$SITE/downloads/Altirra-$version.zip" \
+            '{version: $v, assets: {"win-x64": $url}}')
+          ENTRY=$entry VER=$version yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' altirra.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- altirra.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add altirra.yaml
+          git commit -m "altirra: update releases"
+          git push

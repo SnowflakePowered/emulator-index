@@ -1,0 +1,65 @@
+name: update-mupen64plus
+
+on:
+  schedule:
+    - cron: "15 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: mupen64plus/mupen64plus-core
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = newest tagged bundle release (the prerelease-flagged 2.5.9
+      #           is ignored); history is kept, newest first. The macOS bundle
+      #           is x86_64 only, so it has no macos-arm64 key.
+      # nightly = the rolling "nightly-build" release of the core module only
+      #           (no UI or plugins, no macOS build). Its version is the commit
+      #           in the asset names. Only the newest is kept.
+      # Mupen64Plus has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          stable=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: .tag_name,
+              assets: ({
+                "win-x64":   asset("^mupen64plus-bundle-win64-.*[.]zip$"),
+                "macos-x64": asset("^mupen64plus-bundle-osx-.*[.]zip$"),
+                "linux-x64": asset("^mupen64plus-bundle-linux64-[0-9.]+[.]tar[.]gz$")
+              } | with_entries(select(.value != null)))
+            }')
+          nightly=$(gh api "repos/$REPO/releases/tags/nightly-build" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: ([.assets[].name | capture("-g(?<v>[0-9a-f]+)[.](zip|tar[.]gz)$").v] | first),
+              assets: ({
+                "win-x64":   asset("^mupen64plus-core-msvc-x64-.*[.]zip$"),
+                "linux-x64": asset("^mupen64plus-core-linux-x64-.*[.]tar[.]gz$")
+              } | with_entries(select(.value != null)))
+            }')
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' mupen64plus.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' mupen64plus.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- mupen64plus.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mupen64plus.yaml
+          git commit -m "mupen64plus: update releases"
+          git push

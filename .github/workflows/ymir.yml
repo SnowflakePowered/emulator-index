@@ -1,0 +1,58 @@
+name: update-ymir
+
+on:
+  schedule:
+    - cron: "45 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: ymir-emu/Ymir
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest tagged release; history is kept, newest first.
+      # nightly = the rolling "latest-nightly" release; only the newest is
+      #           kept. Its version comes from the asset names
+      #           (e.g. 0.4.0-dev_839aef3b).
+      # Ymir has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          release_entry='
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: ([.assets[].name | capture("^ymir-windows-x86_64-AVX2-v(?<v>.+)[.]zip$").v] | first),
+              assets: ({
+                "win-x64":     asset("^ymir-windows-x86_64-AVX2-"),
+                "macos-arm64": asset("^ymir-macos-arm64-"),
+                "macos-x64":   asset("^ymir-macos-x64-"),
+                "linux-x64":   asset("^ymir-linux-x86_64-AVX2-")
+              } | with_entries(select(.value != null)))
+            }'
+
+          stable=$(gh api "repos/$REPO/releases/latest" | jq -c "$release_entry")
+          nightly=$(gh api "repos/$REPO/releases/tags/latest-nightly" | jq -c "$release_entry")
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' ymir.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' ymir.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- ymir.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ymir.yaml
+          git commit -m "ymir: update releases"
+          git push

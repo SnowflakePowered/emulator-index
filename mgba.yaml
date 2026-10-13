@@ -1,0 +1,14 @@
+name: mgba
+stable:
+  - version: 0.10.5
+    assets:
+      win-x64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-win64.7z
+      macos-arm64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-macos.dmg
+      linux-x64: https://github.com/mgba-emu/mgba/releases/download/0.10.5/mGBA-0.10.5-appimage-x64.appimage
+preview: []
+nightly:
+  - version: 9155-143adf5
+    assets:
+      win-x64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-win64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.7z
+      macos-arm64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-macos-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.dmg
+      linux-x64: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-08-appimage-x64-9155-143adf5aa2a60c6036810b0cd72445e13d74b0e6.appimage

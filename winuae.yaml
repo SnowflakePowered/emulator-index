@@ -1,0 +1,10 @@
+name: winuae
+stable:
+  - version: 6.0.3
+    assets:
+      win-x64: https://download.abime.net/winuae/releases/WinUAE6030_x64.zip
+preview: []
+nightly:
+  - version: 1380a67
+    assets:
+      win-x64: https://nightly.link/tonioni/WinUAE/actions/artifacts/11824294834.zip

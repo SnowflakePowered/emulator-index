@@ -1,0 +1,72 @@
+name: update-gopher64
+
+on:
+  schedule:
+    - cron: "30 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: gopher64/gopher64
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = artifacts of the newest successful push to main, linked
+      #           through nightly.link. Only the newest is kept.
+      # gopher64 has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("^gopher64-windows-x86_64[.]exe$"),
+                "macos-arm64": asset("^gopher64-macos-aarch64[.]zip$"),
+                "linux-x64":   asset("^gopher64-linux-x86_64$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' gopher64.yaml
+
+      - name: Update nightly
+        run: |
+          read -r run sha <<<"$(gh api "repos/$REPO/actions/workflows/build.yml/runs?branch=main&event=push&status=success&per_page=1" \
+            --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"')"
+          [ -n "$run" ] || exit 0
+
+          entry=$(gh api "repos/$REPO/actions/runs/$run/artifacts?per_page=100" | jq -c --arg sha "${sha:0:7}" --arg repo "$REPO" '
+            [.artifacts[] | select(.expired | not)] as $a
+            | def url($n): [$a[] | select(.name == $n) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first;
+              {
+                version: $sha,
+                assets: ({
+                  "win-x64":     url("gopher64-windows-x86_64"),
+                  "macos-arm64": url("gopher64-macos-aarch64"),
+                  "linux-x64":   url("gopher64-linux-x86_64")
+                } | with_entries(select(.value != null)))
+              }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' gopher64.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- gopher64.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gopher64.yaml
+          git commit -m "gopher64: update releases"
+          git push

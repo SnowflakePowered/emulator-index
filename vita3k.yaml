@@ -1,0 +1,9 @@
+name: vita3k
+stable: []
+preview: []
+nightly:
+  - version: 20df7f4
+    assets:
+      win-x64: https://github.com/Vita3K/Vita3K/releases/download/continuous/windows-latest.zip
+      macos-arm64: https://github.com/Vita3K/Vita3K/releases/download/continuous/macos-arm64-latest.dmg
+      linux-x64: https://github.com/Vita3K/Vita3K/releases/download/continuous/Vita3K-x86_64.AppImage

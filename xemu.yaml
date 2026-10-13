@@ -1,0 +1,14 @@
+name: xemu
+stable:
+  - version: 0.8.136
+    assets:
+      win-x64: https://github.com/xemu-project/xemu/releases/download/v0.8.136/xemu-0.8.136-windows-x86_64.zip
+      macos-arm64: https://github.com/xemu-project/xemu/releases/download/v0.8.136/xemu-0.8.136-macos-universal.zip
+      linux-x64: https://github.com/xemu-project/xemu/releases/download/v0.8.136/xemu-0.8.136-x86_64.AppImage
+preview: []
+nightly:
+  - version: 0.8.136-58-g36334d95b8
+    assets:
+      win-x64: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.136-58-g36334d95b8-windows-x86_64.zip
+      macos-arm64: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.136-58-g36334d95b8-macos-universal-unsigned.zip
+      linux-x64: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.136-58-g36334d95b8-x86_64.AppImage

@@ -1,0 +1,16 @@
+name: mesen-ce
+stable:
+  - version: 2.2.1
+    assets:
+      win-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Windows.zip
+      macos-arm64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_ARM64_AppleSilicon.zip
+      macos-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_macOS_x64_Intel.zip
+      linux-x64: https://github.com/nesdev-org/MesenCE/releases/download/2.2.1/Mesen_2.2.1_Linux_x64.zip
+preview: []
+nightly:
+  - version: 4b8a196
+    assets:
+      win-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483144254.zip
+      macos-arm64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484505635.zip
+      macos-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11484831607.zip
+      linux-x64: https://nightly.link/nesdev-org/MesenCE/actions/artifacts/11483084305.zip

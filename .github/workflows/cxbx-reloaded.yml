@@ -1,0 +1,48 @@
+name: update-cxbx-reloaded
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: Cxbx-Reloaded/Cxbx-Reloaded
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Cxbx-Reloaded only publishes CI builds (CI-<sha> prereleases, the
+      # ones listed on cxbx-reloaded.co.uk/download), so only nightly is
+      # filled in, with the most recently published build. Only the newest
+      # is kept. The build is 32-bit Windows only.
+      - name: Update nightly
+        run: |
+          entry=$(gh api "repos/$REPO/releases?per_page=100" | jq -c '
+            [.[] | select((.draft | not) and (.tag_name | startswith("CI-")))]
+            | max_by(.published_at)
+            | {
+                version: (.tag_name | ltrimstr("CI-")),
+                assets: ({
+                  "win-x86": ([.assets[] | select(.name | test("^CxbxReloaded-Release.*[.]zip$")) | .browser_download_url] | first)
+                } | with_entries(select(.value != null)))
+              }')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' cxbx-reloaded.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- cxbx-reloaded.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cxbx-reloaded.yaml
+          git commit -m "cxbx-reloaded: update releases"
+          git push

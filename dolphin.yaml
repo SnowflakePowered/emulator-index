@@ -1,0 +1,14 @@
+name: dolphin
+stable:
+  - version: 2609a
+    assets:
+      win-x64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x64.7z
+      macos-arm64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-universal.dmg
+      linux-x64: https://dl.dolphin-emu.org/releases/2609a/dolphin-2609a-x86_64.flatpak
+preview: []
+nightly:
+  - version: 2609-81
+    assets:
+      win-x64: https://dl.dolphin-emu.org/builds/75/46/dolphin-master-2609-81-x64.7z
+      macos-arm64: https://dl.dolphin-emu.org/builds/9d/06/dolphin-master-2609-81-universal.dmg
+      linux-x64: https://dl.dolphin-emu.org/builds/8b/aa/dolphin-master-2609-81-x86_64.flatpak

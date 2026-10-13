@@ -1,0 +1,9 @@
+name: stella
+stable:
+  - version: "7.0"
+    assets:
+      win-x64: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0c-windows.zip
+      macos-arm64: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0-macos.dmg
+      linux-x64: https://github.com/stella-emu/stella/releases/download/7.0/stella_7.0_amd64.deb
+preview: []
+nightly: []

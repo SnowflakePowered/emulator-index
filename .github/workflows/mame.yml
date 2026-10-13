@@ -1,0 +1,85 @@
+name: update-mame
+
+on:
+  schedule:
+    - cron: "30 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: mamedev/mame
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first. MAME
+      #           only publishes Windows binaries (plus source), so win-x64 is
+      #           the only key.
+      # nightly = artifacts of the newest successful push to master, linked
+      #           through nightly.link. Windows, macOS and Linux build in
+      #           separate workflows, so the others are looked up by the same
+      #           commit. Only the newest is kept.
+      # MAME has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("mame") | .[0:1] + "." + .[1:]),
+              assets: ({
+                "win-x64": asset("^mame[0-9]+b_x64[.]exe$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' mame.yaml
+
+      - name: Update nightly
+        run: |
+          # newest successful master push run of a workflow, optionally for a given commit
+          run_for() { # workflow file, [sha]
+            gh api "repos/$REPO/actions/workflows/$1/runs?branch=master&event=push&status=success&per_page=1${2:+&head_sha=$2}" \
+              --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"'
+          }
+          # nightly.link URL of the non-expired artifact in a run whose name matches a regex
+          artifact_url() { # run id, name regex
+            [ -n "$1" ] || return 0
+            gh api "repos/$REPO/actions/runs/$1/artifacts?per_page=100" \
+              | jq -r --arg repo "$REPO" --arg re "$2" '[.artifacts[] | select((.expired | not) and (.name | test($re))) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first // empty'
+          }
+
+          read -r win_run sha <<<"$(run_for ci-windows.yml)"
+          [ -n "$sha" ] || exit 0
+          mac_run=$(run_for ci-macos.yml "$sha" | cut -d' ' -f1)
+          linux_run=$(run_for ci-linux.yml "$sha" | cut -d' ' -f1)
+
+          entry=$(jq -nc --arg sha "${sha:0:7}" \
+            --arg win "$(artifact_url "$win_run" '^mame-windows-gcc-x64-')" \
+            --arg mac "$(artifact_url "$mac_run" '^mame-macos-')" \
+            --arg linux "$(artifact_url "$linux_run" '^mame-linux-')" '
+            {
+              version: $sha,
+              assets: ({"win-x64": $win, "macos-arm64": $mac, "linux-x64": $linux}
+                       | with_entries(select(.value != "")))
+            }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' mame.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- mame.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mame.yaml
+          git commit -m "mame: update releases"
+          git push

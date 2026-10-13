@@ -1,0 +1,14 @@
+name: gopher64
+stable:
+  - version: 1.1.40
+    assets:
+      win-x64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-windows-x86_64.exe
+      macos-arm64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-macos-aarch64.zip
+      linux-x64: https://github.com/gopher64/gopher64/releases/download/v1.1.40/gopher64-linux-x86_64
+preview: []
+nightly:
+  - version: 374a8ce
+    assets:
+      win-x64: https://nightly.link/gopher64/gopher64/actions/artifacts/11822997744.zip
+      macos-arm64: https://nightly.link/gopher64/gopher64/actions/artifacts/11823570494.zip
+      linux-x64: https://nightly.link/gopher64/gopher64/actions/artifacts/11822922101.zip

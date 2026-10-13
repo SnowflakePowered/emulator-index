@@ -1,0 +1,71 @@
+name: update-retroarch
+
+on:
+  schedule:
+    - cron: "15 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  BUILDBOT: https://buildbot.libretro.com
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Both channels come from buildbot.libretro.com.
+      # stable  = highest numbered directory under /stable/; history is kept.
+      # nightly = the rolling builds under /nightly/ (the URLs always point at
+      #           the newest build). Its version is the date of the newest
+      #           dated Windows build. Only the newest is kept.
+      # RetroArch has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          # Prints "key url" lines for the files that exist under $1 (a base URL).
+          assets() {
+            for spec in \
+              "win-x64 windows/x86_64/RetroArch.7z" \
+              "macos-arm64 apple/osx/universal/RetroArch_Metal.dmg" \
+              "linux-x64 linux/x86_64/RetroArch.7z"; do
+              set -- "$1" $spec
+              if curl -fsIL -o /dev/null "$1/$3"; then echo "$2 $1/$3"; fi
+            done
+          }
+          to_json() { jq -Rn '[inputs | split(" ") | {(.[0]): .[1]}] | add // {}'; }
+
+          # stable
+          version=$(curl -fsSL "$BUILDBOT/stable/" \
+            | grep -oE 'href="/stable/[0-9]+[.][0-9]+[.][0-9]+/"' | grep -oE '[0-9]+[.][0-9]+[.][0-9]+' \
+            | sort -V | tail -1)
+          stable_assets=$(assets "$BUILDBOT/stable/$version" | to_json)
+          if [ "$stable_assets" != "{}" ]; then
+            entry=$(jq -nc --arg v "$version" --argjson a "$stable_assets" '{version: $v, assets: $a}')
+            ENTRY=$entry VER=$version yq -i -P '
+              .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+            ' retroarch.yaml
+          fi
+
+          # nightly
+          date=$(curl -fsSL "$BUILDBOT/nightly/windows/x86_64/" \
+            | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}_RetroArch[.]7z' | cut -d_ -f1 | sort | tail -1)
+          nightly_assets=$(assets "$BUILDBOT/nightly" | to_json)
+          if [ -n "$date" ] && [ "$nightly_assets" != "{}" ]; then
+            entry=$(jq -nc --arg v "$date" --argjson a "$nightly_assets" '{version: $v, assets: $a}')
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' retroarch.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- retroarch.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add retroarch.yaml
+          git commit -m "retroarch: update releases"
+          git push

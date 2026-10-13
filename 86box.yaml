@@ -1,0 +1,14 @@
+name: 86box
+stable:
+  - version: "6.0"
+    assets:
+      win-x64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Windows-64-b9001.zip
+      macos-arm64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-macOS-x86_64%2Barm64-b9001.zip
+      linux-x64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Linux-x86_64-b9001.AppImage
+preview: []
+nightly:
+  - version: "10393"
+    assets:
+      win-x64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/Windows%20-%20x64%20%2864-bit%29/86Box-Windows-64-b10393.zip
+      macos-arm64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/macOS%20-%20Universal%20%28Intel%20and%20Apple%20Silicon%29/86Box-macOS-x86_64%2Barm64-b10393.zip
+      linux-x64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/Linux%20-%20x64%20%2864-bit%29/86Box-Linux-x86_64-b10393.AppImage

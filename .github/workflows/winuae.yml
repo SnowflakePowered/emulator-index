@@ -1,0 +1,68 @@
+name: update-winuae
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: tonioni/WinUAE
+  PAGE: https://www.winuae.net/download/
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = the release linked from winuae.net/download (the GitHub repo
+      #           has no releases); history is kept, newest first. The zip is
+      #           named after the version, e.g. WinUAE6030_x64.zip = 6.0.3.
+      # nightly = the "WinUAE x64" artifact of the newest successful push to
+      #           master, linked through nightly.link. Only the newest is kept.
+      # WinUAE is Windows-only and has no preview channel.
+      - name: Update stable
+        run: |
+          url=$(curl -fsSL "$PAGE" | grep -oE 'https://download[.]abime[.]net/winuae/releases/WinUAE[0-9]+_x64[.]zip' | head -1)
+          [ -n "$url" ] || { echo "download link not found"; exit 1; }
+          digits=$(sed -E 's|.*/WinUAE([0-9]+)_x64[.]zip|\1|' <<<"$url")
+          # 6030 -> 6.0.3, 6031 -> 6.0.3.1 (the last digit is a build suffix)
+          version=$(sed -E 's/^([0-9]+)([0-9])([0-9])([0-9])$/\1.\2.\3.\4/; s/[.]0$//' <<<"$digits")
+
+          entry=$(jq -nc --arg v "$version" --arg url "$url" '{version: $v, assets: {"win-x64": $url}}')
+          ENTRY=$entry VER=$version yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' winuae.yaml
+
+      - name: Update nightly
+        run: |
+          read -r run sha <<<"$(gh api "repos/$REPO/actions/workflows/build-winuae-binary.yml/runs?branch=master&event=push&status=success&per_page=1" \
+            --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"')"
+          [ -n "$run" ] || exit 0
+
+          entry=$(gh api "repos/$REPO/actions/runs/$run/artifacts?per_page=100" | jq -c --arg sha "${sha:0:7}" --arg repo "$REPO" '
+            [.artifacts[] | select(.expired | not)] as $a
+            | def url($n): [$a[] | select(.name == $n) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first;
+              {
+                version: $sha,
+                assets: ({"win-x64": url("WinUAE x64")} | with_entries(select(.value != null)))
+              }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' winuae.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- winuae.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add winuae.yaml
+          git commit -m "winuae: update releases"
+          git push

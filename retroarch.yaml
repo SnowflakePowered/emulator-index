@@ -1,0 +1,14 @@
+name: retroarch
+stable:
+  - version: 1.22.2
+    assets:
+      win-x64: https://buildbot.libretro.com/stable/1.22.2/windows/x86_64/RetroArch.7z
+      macos-arm64: https://buildbot.libretro.com/stable/1.22.2/apple/osx/universal/RetroArch_Metal.dmg
+      linux-x64: https://buildbot.libretro.com/stable/1.22.2/linux/x86_64/RetroArch.7z
+preview: []
+nightly:
+  - version: "2026-10-13"
+    assets:
+      win-x64: https://buildbot.libretro.com/nightly/windows/x86_64/RetroArch.7z
+      macos-arm64: https://buildbot.libretro.com/nightly/apple/osx/universal/RetroArch_Metal.dmg
+      linux-x64: https://buildbot.libretro.com/nightly/linux/x86_64/RetroArch.7z

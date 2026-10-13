@@ -1,0 +1,75 @@
+name: update-eden
+
+on:
+  schedule:
+    - cron: "45 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  # Eden is hosted on a Forgejo instance (Gitea-compatible API, no token needed)
+  API: https://git.eden-emu.dev/api/v1/repos
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest release of eden-emu/eden; history is kept, newest first.
+      # nightly = latest release of eden-ci/nightly. Those releases have no
+      #           attached files; the download links (nightly.eden-emu.dev) are
+      #           listed in the release notes, so they are read from there.
+      #           Only the newest is kept.
+      # Both use the x86_64 PGO builds the downloads page recommends.
+      # Eden has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(curl -fsSL "$API/eden-emu/eden/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":     asset("^Eden-Windows-.*-amd64-clang-pgo[.]zip$"),
+                "macos-arm64": asset("^Eden-macOS-.*[.]dmg$"),
+                "linux-x64":   asset("^Eden-Linux-.*-amd64-clang-pgo[.]AppImage$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' eden.yaml
+
+      - name: Update nightly
+        run: |
+          release=$(curl -fsSL "$API/eden-ci/nightly/releases/latest")
+          tag=$(jq -r .tag_name <<<"$release")
+          urls=$(jq -r .body <<<"$release" | grep -oE "https://nightly[.]eden-emu[.]dev/$tag/[^ )\"]+" | sort -u)
+
+          entry=$(jq -Rn --arg tag "$tag" '
+            [inputs] as $u
+            | def url($re): [$u[] | select(test($re))] | first;
+              {
+                version: ($tag | split(".")[-1]),
+                assets: ({
+                  "win-x64":     url("/Eden-Windows-[0-9a-f]+-amd64-clang-pgo[.]zip$"),
+                  "macos-arm64": url("/Eden-macOS-[0-9a-f]+[.]dmg$"),
+                  "linux-x64":   url("/Eden-Linux-[0-9a-f]+-amd64-clang-pgo[.]AppImage$")
+                } | with_entries(select(.value != null)))
+              }' <<<"$urls")
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' eden.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- eden.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eden.yaml
+          git commit -m "eden: update releases"
+          git push

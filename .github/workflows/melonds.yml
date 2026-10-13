@@ -1,0 +1,83 @@
+name: update-melonds
+
+on:
+  schedule:
+    - cron: "45 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: melonDS-emu/melonDS
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = artifacts of the newest master push that built successfully
+      #           on Windows, linked through nightly.link. Only the newest is
+      #           kept.
+      # melonDS has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: .tag_name,
+              assets: ({
+                "win-x64":     asset("-windows-x86_64[.]zip$"),
+                "macos-arm64": asset("-macOS-universal[.]zip$"),
+                "linux-x64":   asset("-appimage-x86_64[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' melonds.yaml
+
+      - name: Update nightly
+        run: |
+          # newest successful master push run of a workflow, optionally for a given commit
+          run_for() { # workflow file, [sha]
+            gh api "repos/$REPO/actions/workflows/$1/runs?branch=master&event=push&status=success&per_page=1${2:+&head_sha=$2}" \
+              --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"'
+          }
+          # id of the non-expired artifact in a run whose name matches a regex
+          artifact_id() { # run id, name regex
+            gh api "repos/$REPO/actions/runs/$1/artifacts?per_page=100" \
+              | jq -r --arg re "$2" '[.artifacts[] | select((.expired | not) and (.name | test($re))) | .id] | first // empty'
+          }
+          link() { [ -z "$1" ] || echo "https://nightly.link/$REPO/actions/artifacts/$1.zip"; }
+
+          read -r win_run sha <<<"$(run_for build-windows.yml)"
+          [ -n "$sha" ] || exit 0
+          mac_run=$(run_for build-macos.yml "$sha" | cut -d' ' -f1)
+
+          win=$(link "$(artifact_id "$win_run" '^melonDS-windows-x86_64$')")
+          mac=""
+          [ -z "$mac_run" ] || mac=$(link "$(artifact_id "$mac_run" '^macOS-universal[.]zip$')")
+
+          entry=$(jq -nc --arg sha "${sha:0:7}" --arg win "$win" --arg mac "$mac" '
+            {
+              version: $sha,
+              assets: ({"win-x64": $win, "macos-arm64": $mac} | with_entries(select(.value != "")))
+            }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' melonds.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- melonds.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add melonds.yaml
+          git commit -m "melonds: update releases"
+          git push

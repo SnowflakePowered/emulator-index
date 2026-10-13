@@ -1,0 +1,12 @@
+name: ares
+stable:
+  - version: v148
+    assets:
+      win-x64: https://github.com/ares-emulator/ares/releases/download/v148/ares-windows-x64.zip
+      macos-arm64: https://github.com/ares-emulator/ares/releases/download/v148/ares-macos-universal.zip
+preview: []
+nightly:
+  - version: 4cb8d92
+    assets:
+      win-x64: https://github.com/ares-emulator/ares/releases/download/nightly/ares-windows-x64.zip
+      macos-arm64: https://github.com/ares-emulator/ares/releases/download/nightly/ares-macos-universal.zip

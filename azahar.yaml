@@ -1,0 +1,22 @@
+name: azahar
+stable:
+  - version: "2126.2"
+    assets:
+      win-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-windows-msvc-2126.2.zip
+      macos-arm64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-arm64-2126.2.zip
+      macos-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-x86_64-2126.2.zip
+      linux-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar.AppImage
+preview:
+  - version: 2127.0-alpha1
+    assets:
+      win-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-windows-msvc-2127.0-alpha1.zip
+      macos-arm64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-arm64-2127.0-alpha1.zip
+      macos-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-x86_64-2127.0-alpha1.zip
+      linux-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar.AppImage
+nightly:
+  - version: bfa7687
+    run: 38313798017
+    assets:
+      win-x64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11777408906.zip
+      macos-arm64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11778114980.zip
+      linux-x64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11775698520.zip

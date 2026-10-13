@@ -1,0 +1,90 @@
+name: update-azahar
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: azahar-emu/azahar
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable: latest non-prerelease. preview: latest alpha prerelease.
+      # Both keep history, newest first.
+      - name: Update stable and preview
+        run: |
+          release_entry='
+            .tag_name as $t
+            | [.assets[].name] as $names
+            | {
+                version: $t,
+                assets: ([
+                    {key: "win-x64",      name: "azahar-windows-msvc-\($t).zip"},
+                    {key: "macos-arm64",  name: "azahar-macos-arm64-\($t).zip"},
+                    {key: "macos-x64",    name: "azahar-macos-x86_64-\($t).zip"},
+                    {key: "linux-x64", name: "azahar.AppImage"}
+                  ]
+                  | map(select(.name as $n | $names | index($n)))
+                  | map({(.key): "https://github.com/\(env.REPO)/releases/download/\($t)/\(.name)"})
+                  | add)
+              }'
+
+          update_channel() { # channel, release json
+            [ -n "$2" ] || return 0
+            entry=$(jq -c "$release_entry" <<<"$2")
+            ENTRY=$entry VER=$(jq -r .version <<<"$entry") CH=$1 yq -i -P '
+              .[strenv(CH)] = ([env(ENTRY)] + ((.[strenv(CH)] // []) | map(select(.version != strenv(VER)))))
+            ' azahar.yaml
+          }
+
+          stable=$(gh api "repos/$REPO/releases/latest")
+          preview=$(gh api "repos/$REPO/releases?per_page=30" \
+            --jq '[.[] | select(.prerelease and (.draft | not) and (.tag_name | ascii_downcase | contains("alpha")))] | first // empty')
+
+          update_channel stable "$stable"
+          update_channel preview "$preview"
+
+      # nightly: artifacts of the latest successful master run of build.yml,
+      # linked via nightly.link. Only the newest is kept (artifacts expire).
+      - name: Update nightly
+        run: |
+          run=$(gh api "repos/$REPO/actions/workflows/build.yml/runs?branch=master&status=success&event=push&per_page=1" \
+            --jq '.workflow_runs[0] // empty | {id, sha: .head_sha}')
+          [ -n "$run" ] || exit 0
+          run_id=$(jq -r .id <<<"$run")
+
+          entry=$(gh api "repos/$REPO/actions/runs/$run_id/artifacts?per_page=100" | jq -c --argjson run "$run" --arg repo "$REPO" '
+            [.artifacts[] | select(.expired | not)] as $a
+            | def url($n): $a[] | select(.name == $n) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip";
+              {
+                version: $run.sha[0:7],
+                run: $run.id,
+                assets: ({
+                  "win-x64":      url("windows-msvc"),
+                  "macos-arm64":  url("macos"),
+                  "linux-x64": url("linux-x86_64-appimage")
+                } | with_entries(select(.value != null)))
+              }')
+
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' azahar.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- azahar.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add azahar.yaml
+          git commit -m "azahar: update releases"
+          git push

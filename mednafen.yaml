@@ -1,0 +1,7 @@
+name: mednafen
+stable:
+  - version: 1.32.1
+    assets:
+      win-x64: https://mednafen.github.io/releases/files/mednafen-1.32.1-win64.zip
+preview: []
+nightly: []

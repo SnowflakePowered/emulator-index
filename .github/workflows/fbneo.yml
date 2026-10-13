@@ -1,0 +1,69 @@
+name: update-fbneo
+
+on:
+  schedule:
+    - cron: "45 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: finalburnneo/FBNeo
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = newest versioned release (vX.Y.Z.W). GitHub's "latest" is
+      #           the rolling nightly release, so it is picked by tag name
+      #           instead. History is kept, newest first. The releases only
+      #           have Windows and macOS builds.
+      # nightly = the rolling "latest" release. The tag never changes, so the
+      #           version is the short sha of the commit it points at. Only
+      #           the newest is kept. It has no macOS build.
+      # FBNeo has no preview channel.
+      - name: Update stable and nightly
+        run: |
+          stable_json=$(gh api "repos/$REPO/releases?per_page=30" \
+            | jq -c '[.[] | select((.draft | not) and (.tag_name | test("^v[0-9]")))] | max_by(.published_at)')
+          stable=$(jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("v")),
+              assets: ({
+                "win-x64":   asset("^fbneo[.]zip$"),
+                "macos-x64": asset("[.]dmg$")
+              } | with_entries(select(.value != null)))
+            }' <<<"$stable_json")
+
+          sha=$(gh api "repos/$REPO/commits/latest" --jq .sha)
+          nightly=$(gh api "repos/$REPO/releases/tags/latest" | jq -c --arg sha "${sha:0:7}" '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: $sha,
+              assets: ({
+                "win-x64":   asset("^windows-x86_64[.]zip$"),
+                "linux-x64": asset("^linux-sdl2-x86_64[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+
+          ENTRY=$stable VER=$(jq -r .version <<<"$stable") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' fbneo.yaml
+          ENTRY=$nightly yq -i -P '.nightly = [env(ENTRY)]' fbneo.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- fbneo.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fbneo.yaml
+          git commit -m "fbneo: update releases"
+          git push

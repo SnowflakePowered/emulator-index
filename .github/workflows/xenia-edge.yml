@@ -1,0 +1,50 @@
+name: update-xenia-edge
+
+on:
+  schedule:
+    - cron: "30 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: has207/xenia-edge
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Xenia Edge only publishes a release per commit (tagged with the short
+      # sha), so only nightly is filled in, with the most recently published
+      # one. Only the newest is kept.
+      - name: Update nightly
+        run: |
+          entry=$(gh api "repos/$REPO/releases?per_page=50" | jq -c '
+            [.[] | select(.draft | not)]
+            | max_by(.published_at)
+            | def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+              {
+                version: .tag_name,
+                assets: ({
+                  "win-x64":     asset("^xenia_edge_windows[.]zip$"),
+                  "macos-arm64": asset("^xenia_edge_macos[.]dmg$"),
+                  "linux-x64":   asset("^xenia_edge_linux[.]AppImage$")
+                } | with_entries(select(.value != null)))
+              }')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' xenia-edge.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- xenia-edge.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add xenia-edge.yaml
+          git commit -m "xenia-edge: update releases"
+          git push

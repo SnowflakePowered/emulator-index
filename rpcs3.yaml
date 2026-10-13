@@ -1,0 +1,9 @@
+name: rpcs3
+stable: []
+preview: []
+nightly:
+  - version: 0.0.43-20286
+    assets:
+      win-x64: https://github.com/RPCS3/rpcs3-binaries-win/releases/download/build-6fe3c87fb41c29b21d8796b15eca5c80ad3b36d4/rpcs3-v0.0.43-20286-6fe3c87f_win64_msvc.7z
+      macos-arm64: https://github.com/RPCS3/rpcs3-binaries-mac-arm64/releases/download/build-6fe3c87fb41c29b21d8796b15eca5c80ad3b36d4/rpcs3-v0.0.43-20286-6fe3c87f_macos_aarch64.7z
+      linux-x64: https://github.com/RPCS3/rpcs3-binaries-linux/releases/download/build-6fe3c87fb41c29b21d8796b15eca5c80ad3b36d4/rpcs3-v0.0.43-20286-6fe3c87f_linux64.AppImage

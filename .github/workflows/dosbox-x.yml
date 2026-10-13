@@ -1,0 +1,88 @@
+name: update-dosbox-x
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: joncampbell123/dosbox-x
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release (the standard build, not the "osfree"
+      #           variant); history is kept, newest first. There is no Linux
+      #           build in the release.
+      # nightly = the nightly artifacts of the newest successful push to
+      #           master, linked through nightly.link. The Windows, macOS and
+      #           Linux builds are separate workflows, so the others are
+      #           looked up by the same commit. Only the newest is kept.
+      # DOSBox-X has no preview channel.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: (.tag_name | ltrimstr("dosbox-x-v")),
+              assets: ({
+                "win-x64":     asset("^dosbox-x-vsbuild-win64-.*-portable[.]zip$"),
+                "macos-arm64": asset("^dosbox-x-macosx-arm64-.*[.]zip$"),
+                "macos-x64":   asset("^dosbox-x-macosx-x86_64-.*[.]zip$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' dosbox-x.yaml
+
+      - name: Update nightly
+        run: |
+          # newest successful master push run of a workflow, optionally for a given commit
+          run_for() { # workflow file, [sha]
+            gh api "repos/$REPO/actions/workflows/$1/runs?branch=master&event=push&status=success&per_page=1${2:+&head_sha=$2}" \
+              --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"'
+          }
+          # nightly.link URL of the non-expired artifact in a run whose name matches a regex
+          artifact_url() { # run id, name regex
+            [ -n "$1" ] || return 0
+            gh api "repos/$REPO/actions/runs/$1/artifacts?per_page=100" \
+              | jq -r --arg repo "$REPO" --arg re "$2" '[.artifacts[] | select((.expired | not) and (.name | test($re))) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first // empty'
+          }
+
+          read -r win_run sha <<<"$(run_for vsbuild64.yml)"
+          [ -n "$sha" ] || exit 0
+          mac_run=$(run_for macos.yml "$sha" | cut -d' ' -f1)
+          linux_run=$(run_for linux.yml "$sha" | cut -d' ' -f1)
+
+          entry=$(jq -nc --arg sha "${sha:0:7}" \
+            --arg win "$(artifact_url "$win_run" '^dosbox-x-vsbuild-win64-[0-9]+-nightly$')" \
+            --arg arm "$(artifact_url "$mac_run" '^dosbox-x-macosx-arm64-[0-9]+-nightly[.]zip$')" \
+            --arg intel "$(artifact_url "$mac_run" '^dosbox-x-macosx-x86_64-[0-9]+-nightly[.]zip$')" \
+            --arg linux "$(artifact_url "$linux_run" '^dosbox-x-[0-9]+_nightly_AppImage$')" '
+            {
+              version: $sha,
+              assets: ({"win-x64": $win, "macos-arm64": $arm, "macos-x64": $intel, "linux-x64": $linux}
+                       | with_entries(select(.value != "")))
+            }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' dosbox-x.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- dosbox-x.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dosbox-x.yaml
+          git commit -m "dosbox-x: update releases"
+          git push

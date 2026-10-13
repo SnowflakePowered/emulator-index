@@ -1,0 +1,12 @@
+name: mame
+stable:
+  - version: "0.289"
+    assets:
+      win-x64: https://github.com/mamedev/mame/releases/download/mame0289/mame0289b_x64.exe
+preview: []
+nightly:
+  - version: ca0a9a1
+    assets:
+      win-x64: https://nightly.link/mamedev/mame/actions/artifacts/11821494461.zip
+      macos-arm64: https://nightly.link/mamedev/mame/actions/artifacts/11811927963.zip
+      linux-x64: https://nightly.link/mamedev/mame/actions/artifacts/11819630621.zip

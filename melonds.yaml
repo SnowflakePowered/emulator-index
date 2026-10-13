@@ -1,0 +1,13 @@
+name: melonds
+stable:
+  - version: "1.1"
+    assets:
+      win-x64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-windows-x86_64.zip
+      macos-arm64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-macOS-universal.zip
+      linux-x64: https://github.com/melonDS-emu/melonDS/releases/download/1.1/melonDS-1.1-appimage-x86_64.zip
+preview: []
+nightly:
+  - version: 906e9eb
+    assets:
+      win-x64: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501355970.zip
+      macos-arm64: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501678370.zip

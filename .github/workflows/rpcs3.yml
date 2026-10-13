@@ -1,0 +1,53 @@
+name: update-rpcs3
+
+on:
+  schedule:
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # RPCS3 only ships continuous builds, so only nightly is filled in:
+      # the newest build reported by RPCS3's own update API. Only the newest
+      # is kept. The API reports x64 builds only, so the macOS arm64 build is
+      # looked up in RPCS3/rpcs3-binaries-mac-arm64 under the same build tag.
+      - name: Update nightly
+        run: |
+          latest=$(curl -fsSL "https://update.rpcs3.net/?api=v2&c=0000000000000000000000000000000000000000" | jq -c .latest_build)
+          version=$(jq -r .version <<<"$latest")
+          win=$(jq -r .windows.download <<<"$latest")
+          linux=$(jq -r .linux.download <<<"$latest")
+          tag=$(sed -E 's|.*/download/([^/]+)/.*|\1|' <<<"$win")
+
+          mac=$(gh api "repos/RPCS3/rpcs3-binaries-mac-arm64/releases/tags/$tag" \
+            --jq '[.assets[] | select(.name | test("[.]7z$")) | .browser_download_url] | first // empty' || true)
+
+          entry=$(jq -nc --arg version "$version" --arg win "$win" --arg mac "$mac" --arg linux "$linux" '
+            {
+              version: $version,
+              assets: ({"win-x64": $win, "macos-arm64": $mac, "linux-x64": $linux}
+                       | with_entries(select(.value != "")))
+            }')
+          ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' rpcs3.yaml
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- rpcs3.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rpcs3.yaml
+          git commit -m "rpcs3: update releases"
+          git push

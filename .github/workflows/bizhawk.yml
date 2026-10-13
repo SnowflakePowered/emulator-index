@@ -1,0 +1,71 @@
+name: update-bizhawk
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  REPO: TASEmulators/BizHawk
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # stable  = latest GitHub release; history is kept, newest first.
+      # nightly = dev build artifacts of the newest successful push to master
+      #           (the CI workflow), linked through nightly.link. Only the
+      #           newest is kept.
+      # BizHawk has no preview channel and no macOS build.
+      - name: Update stable
+        run: |
+          entry=$(gh api "repos/$REPO/releases/latest" | jq -c '
+            def asset($re): [.assets[] | select(.name | test($re)) | .browser_download_url] | first;
+            {
+              version: .tag_name,
+              assets: ({
+                "win-x64":   asset("-win-x64[.]zip$"),
+                "linux-x64": asset("-linux-x64[.]tar[.]gz$")
+              } | with_entries(select(.value != null)))
+            }')
+          ENTRY=$entry VER=$(jq -r .version <<<"$entry") yq -i -P '
+            .stable = ([env(ENTRY)] + ((.stable // []) | map(select(.version != strenv(VER)))))
+          ' bizhawk.yaml
+
+      - name: Update nightly
+        run: |
+          read -r run sha <<<"$(gh api "repos/$REPO/actions/workflows/ci.yml/runs?branch=master&event=push&status=success&per_page=1" \
+            --jq '.workflow_runs[0] | select(.) | "\(.id) \(.head_sha)"')"
+          [ -n "$run" ] || exit 0
+
+          entry=$(gh api "repos/$REPO/actions/runs/$run/artifacts?per_page=100" | jq -c --arg sha "${sha:0:7}" --arg repo "$REPO" '
+            [.artifacts[] | select(.expired | not)] as $a
+            | def url($n): [$a[] | select(.name == $n) | "https://nightly.link/\($repo)/actions/artifacts/\(.id).zip"] | first;
+              {
+                version: $sha,
+                assets: ({
+                  "win-x64":   url("BizHawk-dev-windows"),
+                  "linux-x64": url("BizHawk-dev-linux")
+                } | with_entries(select(.value != null)))
+              }')
+          if [ "$(jq '.assets | length' <<<"$entry")" -gt 0 ]; then
+            ENTRY=$entry yq -i -P '.nightly = [env(ENTRY)]' bizhawk.yaml
+          fi
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- bizhawk.yaml; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bizhawk.yaml
+          git commit -m "bizhawk: update releases"
+          git push
