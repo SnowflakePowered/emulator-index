@@ -2,8 +2,17 @@ name: stella
 stable:
   - version: "7.0"
     assets:
-      win-x64: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0c-windows.zip
-      macos-arm64: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0-macos.dmg
-      linux-x64: https://github.com/stella-emu/stella/releases/download/7.0/stella_7.0_amd64.deb
+      win-x64:
+        url: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0c-windows.zip
+        sha256: 44102ccf8af74b021cf143db346e561c5d6ed2a2e91d79ee6d3c99d7c42f4653
+        size: 4255411
+      macos-arm64:
+        url: https://github.com/stella-emu/stella/releases/download/7.0/Stella-7.0-macos.dmg
+        sha256: dcd6de1baf5b2fdcf655478eb04d3fb8e65e3cdaed2e04cd6c5347b3149c1eed
+        size: 10554991
+      linux-x64:
+        url: https://github.com/stella-emu/stella/releases/download/7.0/stella_7.0_amd64.deb
+        sha256: 1bc4a1ea57661c315db6035fb55bef8e7e0d0f1054b0db2b256888f3a9a871a9
+        size: 3059858
 preview: []
 nightly: []
