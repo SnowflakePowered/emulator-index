@@ -2,9 +2,15 @@ name: winuae
 stable:
   - version: 6.0.3
     assets:
-      win-x64: https://download.abime.net/winuae/releases/WinUAE6030_x64.zip
+      win-x64:
+        url: https://download.abime.net/winuae/releases/WinUAE6030_x64.zip
+        sha256: f8b7c44e8ab2f68db49b4205793848b4496464dbee3c036921840d82627f4fc3
+        size: 11374798
 preview: []
 nightly:
   - version: 1380a67
     assets:
-      win-x64: https://nightly.link/tonioni/WinUAE/actions/artifacts/11824294834.zip
+      win-x64:
+        url: https://nightly.link/tonioni/WinUAE/actions/artifacts/11824294834.zip
+        sha256: 1f43c2c6c35241934fad264d4460549fc6cb05503ee50df5befad3925c3fd708
+        size: 12000342
