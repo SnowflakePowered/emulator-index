@@ -2,13 +2,31 @@ name: eden
 stable:
   - version: 0.2.1
     assets:
-      win-x64: https://stable.eden-emu.dev/v0.2.1/Eden-Windows-v0.2.1-amd64-clang-pgo.zip
-      macos-arm64: https://stable.eden-emu.dev/v0.2.1/Eden-macOS-v0.2.1.dmg
-      linux-x64: https://stable.eden-emu.dev/v0.2.1/Eden-Linux-v0.2.1-amd64-clang-pgo.AppImage
+      win-x64:
+        url: https://stable.eden-emu.dev/v0.2.1/Eden-Windows-v0.2.1-amd64-clang-pgo.zip
+        sha256: 6c1b53ce325170a026cc0f87098380027dc6170d94ba95f913aab7596fd097cb
+        size: 36943177
+      macos-arm64:
+        url: https://stable.eden-emu.dev/v0.2.1/Eden-macOS-v0.2.1.dmg
+        sha256: 40575fc79a61550fbb9e332cbae94ccd20f5de20ff61b4b60fe1d42f2525c0b5
+        size: 24259461
+      linux-x64:
+        url: https://stable.eden-emu.dev/v0.2.1/Eden-Linux-v0.2.1-amd64-clang-pgo.AppImage
+        sha256: 7a28bf988b0648831989722bdbaa90ab31371b403808199813e0ea7c8b25ba6d
+        size: 69276651
 preview: []
 nightly:
   - version: 4dc69c06f7
     assets:
-      win-x64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Windows-4dc69c06f7-amd64-clang-pgo.zip
-      macos-arm64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-macOS-4dc69c06f7.dmg
-      linux-x64: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Linux-4dc69c06f7-amd64-clang-pgo.AppImage
+      win-x64:
+        url: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Windows-4dc69c06f7-amd64-clang-pgo.zip
+        sha256: d4c15374e6065fb60b694cd3b3a1ef40c1e215bc2f7373928c212db26b30df41
+        size: 41011511
+      macos-arm64:
+        url: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-macOS-4dc69c06f7.dmg
+        sha256: 23f3a8e114885ea78017db133ae7a18ee8d4e194e26fb92360c354aab0539f2d
+        size: 26632158
+      linux-x64:
+        url: https://nightly.eden-emu.dev/v1791849564.4dc69c06f7/Eden-Linux-4dc69c06f7-amd64-clang-pgo.AppImage
+        sha256: e1f52d0f5e4edf688329fdbb906598399e9fde8237709b9e9a2b4627a3ee13de
+        size: 71901595
