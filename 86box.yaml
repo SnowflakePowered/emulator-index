@@ -2,13 +2,31 @@ name: 86box
 stable:
   - version: "6.0"
     assets:
-      win-x64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Windows-64-b9001.zip
-      macos-arm64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-macOS-x86_64%2Barm64-b9001.zip
-      linux-x64: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Linux-x86_64-b9001.AppImage
+      win-x64:
+        url: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Windows-64-b9001.zip
+        sha256: b86722ed547089f095e8875805411f83c76aafd7d318f67286a5a69aecdd7644
+        size: 60046519
+      macos-arm64:
+        url: https://github.com/86Box/86Box/releases/download/v6.0/86Box-macOS-x86_64%2Barm64-b9001.zip
+        sha256: fc66fc97225012af20145ae04193911bbf689fc75f89590774a904483140a5a9
+        size: 124110592
+      linux-x64:
+        url: https://github.com/86Box/86Box/releases/download/v6.0/86Box-Linux-x86_64-b9001.AppImage
+        sha256: 535d3c329f8c32b601103970c86d80aa80298f345452c3524ea2f433624727a4
+        size: 93985272
 preview: []
 nightly:
-  - version: "10393"
+  - version: "10394"
     assets:
-      win-x64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/Windows%20-%20x64%20%2864-bit%29/86Box-Windows-64-b10393.zip
-      macos-arm64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/macOS%20-%20Universal%20%28Intel%20and%20Apple%20Silicon%29/86Box-macOS-x86_64%2Barm64-b10393.zip
-      linux-x64: https://ci.86box.net/job/86Box/10393/artifact/Old%20Recompiler%20%28recommended%29/Linux%20-%20x64%20%2864-bit%29/86Box-Linux-x86_64-b10393.AppImage
+      win-x64:
+        url: https://ci.86box.net/job/86Box/10394/artifact/Old%20Recompiler%20%28recommended%29/Windows%20-%20x64%20%2864-bit%29/86Box-Windows-64-b10394.zip
+        sha256: f5a7ab6873f9b3b4b2556318bd1689c947ca66ffc0f0bb87d2c7137323267da3
+        size: 57326934
+      macos-arm64:
+        url: https://ci.86box.net/job/86Box/10394/artifact/Old%20Recompiler%20%28recommended%29/macOS%20-%20Universal%20%28Intel%20and%20Apple%20Silicon%29/86Box-macOS-x86_64%2Barm64-b10394.zip
+        sha256: 32eadb1987fd4650bdc31d8c3f9c8e80da8c12c491970580410f7a70971b76cf
+        size: 123638914
+      linux-x64:
+        url: https://ci.86box.net/job/86Box/10394/artifact/Old%20Recompiler%20%28recommended%29/Linux%20-%20x64%20%2864-bit%29/86Box-Linux-x86_64-b10394.AppImage
+        sha256: 9286f2222c9d0c184e0bb984d7195b698847105a8a15ce59054150db51bb189c
+        size: 100723192
