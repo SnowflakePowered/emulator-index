@@ -2,13 +2,31 @@ name: pcsx2
 stable:
   - version: 2.8.2
     assets:
-      win-x64: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-windows-x64-Qt.7z
-      macos-arm64: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-macos-Qt.tar.xz
-      linux-x64: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-linux-appimage-x64-Qt.AppImage
+      win-x64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-windows-x64-Qt.7z
+        sha256: 7dfc829ca1994cc1045ac49f05e39b6cf968b72e6a374c40e05c2a2b4ac200b4
+        size: 25670075
+      macos-arm64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-macos-Qt.tar.xz
+        sha256: 3ed9eb40a33eae67134142c24255a079be444f0616ca29575a04a37981f7d426
+        size: 24377200
+      linux-x64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.8.2/pcsx2-v2.8.2-linux-appimage-x64-Qt.AppImage
+        sha256: 0c46bb6a88aa2782b10853a7b07cf3387ba99cbef2b966372cd2315b8571abea
+        size: 60119544
 preview: []
 nightly:
   - version: 2.9.122
     assets:
-      win-x64: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-windows-x64-Qt.7z
-      macos-arm64: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-macos-Qt.tar.xz
-      linux-x64: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-linux-appimage-x64-Qt.AppImage
+      win-x64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-windows-x64-Qt.7z
+        sha256: e4ab15cbd23321454a255443065903bd1fc635e3ef1ff5f3732971f402aca922
+        size: 31943279
+      macos-arm64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-macos-Qt.tar.xz
+        sha256: 770fc70ab2131bc9873913e7f7b72632b902d59cfa685b703a3266723d4fa75d
+        size: 24521312
+      linux-x64:
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.122/pcsx2-v2.9.122-linux-appimage-x64-Qt.AppImage
+        sha256: 91639941178c35526b062f7d3cd44a42d3d29ba20c349c3b4841dbca670cc963
+        size: 60393976
