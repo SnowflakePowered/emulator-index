@@ -15,7 +15,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Parallel Launcher publishes releases on its website, not as GitLab
       # release assets. stable is the Windows build linked from the download

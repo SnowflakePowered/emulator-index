@@ -12,7 +12,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Dolphin publishes through dolphin-emu.org rather than GitHub releases.
       # stable  = "beta" channel (tagged releases, e.g. 2609a); history is kept.

@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # stable  = newest tagged bundle release (the prerelease-flagged 2.5.9
       #           is ignored); history is kept, newest first. The macOS bundle

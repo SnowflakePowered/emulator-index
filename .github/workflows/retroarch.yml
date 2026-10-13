@@ -15,7 +15,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Both channels come from buildbot.libretro.com.
       # stable  = highest numbered directory under /stable/; history is kept.

@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # stable  = latest GitHub release; history is kept, newest first.
       # nightly = newest development build on builds.ppsspp.org (the data

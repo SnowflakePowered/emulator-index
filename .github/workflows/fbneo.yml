@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # stable  = newest versioned release (vX.Y.Z.W). GitHub's "latest" is
       #           the rolling nightly release, so it is picked by tag name

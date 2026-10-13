@@ -15,7 +15,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # RPCS3 only ships continuous builds, so only nightly is filled in:
       # the newest build reported by RPCS3's own update API. Only the newest

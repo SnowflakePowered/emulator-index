@@ -15,7 +15,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Altirra has no public repository for releases and only publishes
       # tagged versions on its website, so only stable is filled in (the

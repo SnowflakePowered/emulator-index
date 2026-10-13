@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # KytyPS5 only publishes a release per build (KytyPS5-<date>-<sha>), so
       # only nightly is filled in, with the most recently published one. Only

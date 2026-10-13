@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Vita3K only publishes the rolling "continuous" release, so only
       # nightly is filled in. The tag never changes, so the version is the

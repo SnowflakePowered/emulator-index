@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # stable  = newest versioned release (v0.1-NNNN); history is kept.
       # preview = the rolling "latest" release.

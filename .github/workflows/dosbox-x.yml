@@ -16,7 +16,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # stable  = latest GitHub release (the standard build, not the "osfree"
       #           variant); history is kept, newest first. There is no Linux
