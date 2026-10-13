@@ -2,11 +2,23 @@ name: fbneo
 stable:
   - version: 1.0.0.2
     assets:
-      win-x64: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/fbneo.zip
-      macos-x64: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/FinalBurnNeo-v1.0.0.2.dmg
+      win-x64:
+        url: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/fbneo.zip
+        sha256: 9d09d210b007745c91143df61da46190d60a344b192ad79e3b6bc1f1140e0ec1
+        size: 9591157
+      macos-x64:
+        url: https://github.com/finalburnneo/FBNeo/releases/download/v1.0.0.2/FinalBurnNeo-v1.0.0.2.dmg
+        sha256: b363a7d5055c670c747e890403d0e07e3cfae0be22ab0f88a98890bc45af57ea
+        size: 21103682
 preview: []
 nightly:
   - version: "2832940"
     assets:
-      win-x64: https://github.com/finalburnneo/FBNeo/releases/download/latest/windows-x86_64.zip
-      linux-x64: https://github.com/finalburnneo/FBNeo/releases/download/latest/linux-sdl2-x86_64.zip
+      win-x64:
+        url: https://github.com/finalburnneo/FBNeo/releases/download/latest/windows-x86_64.zip
+        sha256: cbce06d35042e2d198ee581accec678386f9ed66559d111b959218db75f66ad7
+        size: 16380438
+      linux-x64:
+        url: https://github.com/finalburnneo/FBNeo/releases/download/latest/linux-sdl2-x86_64.zip
+        sha256: a17b7090b168f27e395d28b77f9a679cda69909cb8831d637e5f75d4ceb9a3e8
+        size: 15705927
