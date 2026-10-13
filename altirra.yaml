@@ -2,6 +2,9 @@ name: altirra
 stable:
   - version: "4.40"
     assets:
-      win-x64: https://www.virtualdub.org/downloads/Altirra-4.40.zip
+      win-x64:
+        url: https://www.virtualdub.org/downloads/Altirra-4.40.zip
+        sha256: 8b0be7d81211a97d4633d6c8fdb85f446aa874ebd1e2d82f3aa6b7e41eb42c87
+        size: 7677138
 preview: []
 nightly: []
