@@ -2,14 +2,35 @@ name: dosbox-x
 stable:
   - version: 2026.10.01
     assets:
-      win-x64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-vsbuild-win64-2026.10.01-portable.zip
-      macos-arm64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-arm64-2026.10.01.zip
-      macos-x64: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-x86_64-2026.10.01.zip
+      win-x64:
+        url: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-vsbuild-win64-2026.10.01-portable.zip
+        sha256: 3c50915e63aefe35777d65ebb4391a06b4a2c2342e4c75cbee6bbda4c6916e33
+        size: 44575207
+      macos-arm64:
+        url: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-arm64-2026.10.01.zip
+        sha256: 8514ab856e8ac2611fbdac7adf334c34085c1e00d700a88711f842adec50240f
+        size: 94369585
+      macos-x64:
+        url: https://github.com/joncampbell123/dosbox-x/releases/download/dosbox-x-v2026.10.01/dosbox-x-macosx-x86_64-2026.10.01.zip
+        sha256: a0605348355ff4a45c781f124c44122e97156ae3f7d048637f545c9de641bedb
+        size: 102364921
 preview: []
 nightly:
   - version: 378e6f8
     assets:
-      win-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11666590251.zip
-      macos-arm64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667255892.zip
-      macos-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667057751.zip
-      linux-x64: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667265696.zip
+      win-x64:
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11666590251.zip
+        sha256: 3d8c2fe175477a2a94dfcdb28d299dfafea8553b4757972dc65d4f0355de9369
+        size: 45480648
+      macos-arm64:
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667255892.zip
+        sha256: a5bd65be094c65886740792889bd96188ccba757fd4b876cc681572bd0387ce8
+        size: 93783070
+      macos-x64:
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667057751.zip
+        sha256: c22fc3503c758c8a853a434dfa6ff40a7cb458052bcedd3b5ff07640287b23ee
+        size: 101737152
+      linux-x64:
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/11667265696.zip
+        sha256: 014920193925c39fe3bbd2a41e3d331cc90e10519ab06f30e81f56c74c0d4d93
+        size: 84442997
