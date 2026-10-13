@@ -2,21 +2,54 @@ name: azahar
 stable:
   - version: "2126.2"
     assets:
-      win-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-windows-msvc-2126.2.zip
-      macos-arm64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-arm64-2126.2.zip
-      macos-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-x86_64-2126.2.zip
-      linux-x64: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar.AppImage
+      win-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-windows-msvc-2126.2.zip
+        sha256: 4412eac8d13123c8840f11890fc26e5b0e4c76d16aa28a608941377b948a9db0
+        size: 43941048
+      macos-arm64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-arm64-2126.2.zip
+        sha256: c24dec2bd5111b7d79513d686c5aece6612cdbf9737b2e6ea99cfc426f1d4aef
+        size: 99740365
+      macos-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar-macos-x86_64-2126.2.zip
+        sha256: b3f87eca11ffcccf929c80abeea976f00917be81444d49f48d3dc7ceb3627947
+        size: 101633503
+      linux-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2126.2/azahar.AppImage
+        sha256: af037f8b775198f636b14bcfe63fb401b02246ebfefe1025bb905ce042556960
+        size: 103684600
 preview:
   - version: 2127.0-alpha1
     assets:
-      win-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-windows-msvc-2127.0-alpha1.zip
-      macos-arm64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-arm64-2127.0-alpha1.zip
-      macos-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-x86_64-2127.0-alpha1.zip
-      linux-x64: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar.AppImage
+      win-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-windows-msvc-2127.0-alpha1.zip
+        sha256: 5849c17a3f57c9a6e896133a3db10771afcbea5c4fac2a09b1f6e91acad50db2
+        size: 53678420
+      macos-arm64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-arm64-2127.0-alpha1.zip
+        sha256: fcdbd4a0887a4636019c45752c3ccde6f64c0aad97f1d0f314006a10ccd3ff0c
+        size: 114122766
+      macos-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar-macos-x86_64-2127.0-alpha1.zip
+        sha256: 0957194f94efb579e4c0c326c25c4afa3b4da76b776ac78c6c950f85614283f5
+        size: 101787370
+      linux-x64:
+        url: https://github.com/azahar-emu/azahar/releases/download/2127.0-alpha1/azahar.AppImage
+        sha256: 8d1311c7641c2fcfa2bc384963fc51773e7b92158e4abdb73e08e23385d91905
+        size: 135330296
 nightly:
   - version: bfa7687
     run: 38313798017
     assets:
-      win-x64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11777408906.zip
-      macos-arm64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11778114980.zip
-      linux-x64: https://nightly.link/azahar-emu/azahar/actions/artifacts/11775698520.zip
+      win-x64:
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/11777408906.zip
+        sha256: de8319331f34ffdb50d4323d3615503bc6718aed9b020c152c0c30a085e3c028
+        size: 53440956
+      macos-arm64:
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/11778114980.zip
+        sha256: 4dc4fba2d3863a5447e34ee28fd3a718f96a3b52006437115bde13030f8f1bf7
+        size: 329847496
+      linux-x64:
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/11775698520.zip
+        sha256: a0b37f08a51c049ede9364e728884aac0eea8d5196000b29d27f36c0683407f6
+        size: 134539012
