@@ -30,17 +30,17 @@ preview:
         sha256: 03d56f59730169c0ad2135f6d95f0a98f970fe8c2d3b2f0ac3fd61c0cc7ff33d
         size: 20400632
 nightly:
-  - version: 7422d1b
+  - version: 91c3084
     assets:
       win-x64:
-        url: https://flycast-builds.s3.fr-par.scw.cloud/win/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast.zip
-        sha256: 6f52ba95eff4d10d29d2e8ed31e74216dd2b87156bbecf65c2d35ad303acffb7
-        size: 10766077
+        url: https://flycast-builds.s3.fr-par.scw.cloud/win/heads/dev-91c3084d52fc09e07d78cd1262f926e140d38b67/flycast.zip
+        sha256: 1e80f70fa3c388cdcdae3cc99eac5a196b2f751fd5cf3040559d089265a97eda
+        size: 10767958
       macos-arm64:
-        url: https://flycast-builds.s3.fr-par.scw.cloud/osx/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast.app.zip
-        sha256: 75ae6c8f636d12afda68ab840ddf1541f8e59d81bceffe8b228fdecc012a8830
-        size: 21209797
+        url: https://flycast-builds.s3.fr-par.scw.cloud/osx/heads/dev-91c3084d52fc09e07d78cd1262f926e140d38b67/flycast.app.zip
+        sha256: 48c03d5abba40c0adfcaba5080608c63cc57fcf725566caecf9b7fc1c18adea2
+        size: 21210958
       linux-x64:
-        url: https://flycast-builds.s3.fr-par.scw.cloud/linux/heads/dev-7422d1b831ae7a6e163634b08be120ea3a93235b/flycast-x86_64.AppImage
-        sha256: 4effa2acb0feda1d07aae6eefc9f675d644178e72e0b180994d29325af2aea11
-        size: 21207544
+        url: https://flycast-builds.s3.fr-par.scw.cloud/linux/heads/dev-91c3084d52fc09e07d78cd1262f926e140d38b67/flycast-x86_64.AppImage
+        sha256: 5c83cf3ef60693114f00896d81678a33cce6bdddf01dc13525a3717d624e2e05
+        size: 21211640
