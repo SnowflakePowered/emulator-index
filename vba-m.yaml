@@ -16,12 +16,12 @@ stable:
         size: 21547183
 preview: []
 nightly:
-  - version: "2026-10-12T23:31:55Z"
+  - version: "2026-10-13T23:50:49Z"
     assets:
       win-x64:
         url: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Win-x86_64.zip
-        sha256: f0c7616ecae5f6d9de4b65f975c6d23b1f343b0d551981e2c5356f83e643789a
-        size: 152522748
+        sha256: 0d03bc92c2abee06cc5293be1bc2ce28e4279e2e78c6a3a8ca40c3f2e6bee4bd
+        size: 152542914
       macos-arm64:
         url: https://nightly.visualboyadvance-m.org/visualboyadvance-m-Mac-ARM64.zip
         sha256: 869628e9aa9d4e80d84ed75a16cc95d42da86800b9e7fd058369d34651631abd
