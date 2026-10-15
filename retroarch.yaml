@@ -16,17 +16,17 @@ stable:
         size: 179361448
 preview: []
 nightly:
-  - version: "2026-10-14"
+  - version: "2026-10-15"
     assets:
       win-x64:
-        url: https://buildbot.libretro.com/nightly/windows/x86_64/2026-10-14_RetroArch.7z
-        sha256: e66c14772b0b288302a1567fe15531f5acf7549aa8a253419c935f876d6d2948
-        size: 241852459
+        url: https://buildbot.libretro.com/nightly/windows/x86_64/2026-10-15_RetroArch.7z
+        sha256: b8a381f83767d7d12fdda43541b3250f47ad3b7f8f8a7dc12f807ae3552f486a
+        size: 241902978
       macos-arm64:
         url: https://buildbot.libretro.com/nightly/apple/osx/universal/2026-10-09_RetroArch_Metal.dmg
         sha256: 23a193be336d32b2162fa26aebd5ae1fcfd29baf5691935d18cca4141ba72944
         size: 247192157
       linux-x64:
-        url: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-14_RetroArch.7z
-        sha256: 7a5aa7926acf35a9c1fba091b5a6d55e70f6260c11c9f9f3ada119fa8a1b73db
-        size: 190850476
+        url: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-15_RetroArch.7z
+        sha256: 7a05a912311d1eb0e35c964effe66de1e0cc5d8e6b7683ea2815372bfacfe7fe
+        size: 190888322
