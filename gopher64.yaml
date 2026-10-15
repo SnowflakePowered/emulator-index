@@ -1,5 +1,19 @@
 name: gopher64
 stable:
+  - version: 1.1.42
+    assets:
+      win-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.42/gopher64-windows-x86_64.exe
+        sha256: 38ae758816bc26a255a0fb59197148001cc59c8b764af3439566147ee57cad68
+        size: 64252224
+      macos-arm64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.42/gopher64-macos-aarch64.zip
+        sha256: a433a5324094fe883ed8df2e3d2300f4cb22789d6020edeee9dd0b192521f1ce
+        size: 34125128
+      linux-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.1.42/gopher64-linux-x86_64
+        sha256: 1ec04481d40eab6d9d585270c08fd7d5451811d3756276364ce04998928d991d
+        size: 65626456
   - version: 1.1.40
     assets:
       win-x64:
@@ -16,17 +30,17 @@ stable:
         size: 65595480
 preview: []
 nightly:
-  - version: 9b312ea
+  - version: f05daaf
     assets:
       win-x64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11829915843.zip
-        sha256: 9bb286936d1d5599b411d9470e463fd09035c41eadb04fb76f002c0164b3eb7e
-        size: 34460798
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11976432907.zip
+        sha256: 06292a32e3002d1bd4ecffadc6e32c9f45865487a5834851f867146ccd0ad235
+        size: 34448959
       macos-arm64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11828787980.zip
-        sha256: 5b94983d9a87ec09046a41245703591e2c251b981c2d59d5b9bc2a89c821aead
-        size: 75231280
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11977110562.zip
+        sha256: 31652b022d71cea40d13ef1f7a961561eb6bef4301728dc9d5eb0657088bed45
+        size: 75249132
       linux-x64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11829196904.zip
-        sha256: 61b3e696c894e0979edd244ba55e5e0e186b1e9701c095921b9b7fd13a673845
-        size: 195158986
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/11974963473.zip
+        sha256: 3ab4e528c22f154d688b08e37e1872ff511768416b4834521c384058e04a8a38
+        size: 194956154
