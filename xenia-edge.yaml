@@ -2,17 +2,17 @@ name: xenia-edge
 stable: []
 preview: []
 nightly:
-  - version: b2741d1
+  - version: b62d6f9
     assets:
       win-x64:
-        url: https://github.com/has207/xenia-edge/releases/download/b2741d1/xenia_edge_windows.zip
-        sha256: 55ea8569fa4c38e5d8a4245f6de693027c087dd12ac90c3c64f564f4e10734eb
-        size: 11129138
+        url: https://github.com/has207/xenia-edge/releases/download/b62d6f9/xenia_edge_windows.zip
+        sha256: f14f35db3cfb8e80ec39ce77dcafb6d7b202da9b0684268f4ffcaecd06a1dc5a
+        size: 11159554
       macos-arm64:
-        url: https://github.com/has207/xenia-edge/releases/download/b2741d1/xenia_edge_macos.dmg
-        sha256: e08c63a1f9238689136df21e55e16f7d36292d930f24edb3b7349af394e43e72
-        size: 38670772
+        url: https://github.com/has207/xenia-edge/releases/download/b62d6f9/xenia_edge_macos.dmg
+        sha256: 2179a79e97c4c1c88c177b22dd36b7e2f5c170039f571d3bcc5291a59ddcc8ad
+        size: 38710281
       linux-x64:
-        url: https://github.com/has207/xenia-edge/releases/download/b2741d1/xenia_edge_linux.AppImage
-        sha256: 700e5356f6246f8dd84a536ba1d48438ca7091396869d7ecf4b9556f3a2eab0c
-        size: 19573240
+        url: https://github.com/has207/xenia-edge/releases/download/b62d6f9/xenia_edge_linux.AppImage
+        sha256: db604c45bcfa52001a72e89a1ff44fe2a046383f67b157958a7e7b2563ca9212
+        size: 19601912
