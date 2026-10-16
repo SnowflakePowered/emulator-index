@@ -16,17 +16,17 @@ stable:
         size: 93985272
 preview: []
 nightly:
-  - version: "10428"
+  - version: "10433"
     assets:
       win-x64:
-        url: https://ci.86box.net/job/86Box/10428/artifact/Old%20Recompiler%20%28recommended%29/Windows%20-%20x64%20%2864-bit%29/86Box-Windows-64-b10428.zip
-        sha256: 20d2ce570463f90fc9dc208faf85698fd49fdf82efd5725eb53148ab5f4c4103
-        size: 57379443
+        url: https://ci.86box.net/job/86Box/10433/artifact/Old%20Recompiler%20%28recommended%29/Windows%20-%20x64%20%2864-bit%29/86Box-Windows-64-b10433.zip
+        sha256: 4feb8d8fddaa8dae24f10ae3633ef42d35ca0f8bcf22a22f0b77f96e4439d9e6
+        size: 57378243
       macos-arm64:
-        url: https://ci.86box.net/job/86Box/10428/artifact/Old%20Recompiler%20%28recommended%29/macOS%20-%20Universal%20%28Intel%20and%20Apple%20Silicon%29/86Box-macOS-x86_64%2Barm64-b10428.zip
-        sha256: 3867c9a5ccf24fb94915631c815b6f2f4010c3baaff85f46717f14c95bcecdb1
-        size: 123702034
+        url: https://ci.86box.net/job/86Box/10433/artifact/Old%20Recompiler%20%28recommended%29/macOS%20-%20Universal%20%28Intel%20and%20Apple%20Silicon%29/86Box-macOS-x86_64%2Barm64-b10433.zip
+        sha256: 3ae53f88d7bbfb529423e7fea634d801c3c201e5d08ef3126d1aa83b090ff9f8
+        size: 123707667
       linux-x64:
-        url: https://ci.86box.net/job/86Box/10428/artifact/Old%20Recompiler%20%28recommended%29/Linux%20-%20x64%20%2864-bit%29/86Box-Linux-x86_64-b10428.AppImage
-        sha256: 4202914911064c089333cfb8780862720a005540cde760acdd990bcd707ebb44
+        url: https://ci.86box.net/job/86Box/10433/artifact/Old%20Recompiler%20%28recommended%29/Linux%20-%20x64%20%2864-bit%29/86Box-Linux-x86_64-b10433.AppImage
+        sha256: 1a5104e20a1d330810828a952174696d7087d6c998fdbb55b6598724873f6e05
         size: 100776440
