@@ -30,17 +30,17 @@ stable:
         size: 32964443
 preview: []
 nightly:
-  - version: 2026-10-15-b2d7ec7
+  - version: 2026-10-15-5aa7ffa
     assets:
       win-x64:
-        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-b2d7ec7d31f9ad9426db93afe079db8679b3e1e0/shadps4-win64-sdl-2026-10-15-b2d7ec7.zip
-        sha256: 0ce3ac9bc0c2a172702c5833446f3d39c2a9826f97838a609351fe70a7162dab
-        size: 31352385
+        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-5aa7ffa3f4f21bba827d7865ed8f69f98f993542/shadps4-win64-sdl-2026-10-15-5aa7ffa.zip
+        sha256: 6292e3abdfd42deb2361158330ef2c442960f8830b5a054a33fb952a9f1cfa21
+        size: 31407468
       macos-arm64:
-        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-b2d7ec7d31f9ad9426db93afe079db8679b3e1e0/shadps4-macos-sdl-2026-10-15-b2d7ec7.zip
-        sha256: ad8a459979866166ff709af6311c4f8b631b500ee9df467cd9f26730d5a46792
-        size: 36780938
+        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-5aa7ffa3f4f21bba827d7865ed8f69f98f993542/shadps4-macos-sdl-2026-10-15-5aa7ffa.zip
+        sha256: 0733b7406a109c97fa13fb22080821c0512b8ad34bb9a33612a4eee424ed7cf4
+        size: 36838928
       linux-x64:
-        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-b2d7ec7d31f9ad9426db93afe079db8679b3e1e0/shadps4-linux-sdl-2026-10-15-b2d7ec7.zip
-        sha256: a145d0b71073222e12bdbb896a4ebb8c511bf2f35b18a5f3eb69514c969d15e2
-        size: 33253746
+        url: https://github.com/shadps4-emu/shadPS4/releases/download/Pre-release-shadPS4-2026-10-15-5aa7ffa3f4f21bba827d7865ed8f69f98f993542/shadps4-linux-sdl-2026-10-15-5aa7ffa.zip
+        sha256: efe632463a137dca63e718124a2e65b64d644f8ab48de275f93e7fc36465f1f0
+        size: 33323091
