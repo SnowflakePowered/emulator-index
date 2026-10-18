@@ -30,17 +30,17 @@ stable:
         size: 16402936
 preview: []
 nightly:
-  - version: 0.8.137-13-g0103939ba4
+  - version: 0.8.137-15-g8fc3208697
     assets:
       win-x64:
-        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-13-g0103939ba4-windows-x86_64.zip
-        sha256: f15d103a11c970decdb5f15b6cb4a8993accd1acd475ed7b75f247f5e39f6616
-        size: 11412263
+        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-15-g8fc3208697-windows-x86_64.zip
+        sha256: 78d55f244448975c0cfa3b9623682516ac29100efa312e7aaccbf1d445542c06
+        size: 11411834
       macos-arm64:
-        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-13-g0103939ba4-macos-universal-unsigned.zip
-        sha256: 6f2060f6cc1f52e82f802373aa686b5ee45f74a2351198b461bec635fdb8288d
-        size: 21347827
+        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-15-g8fc3208697-macos-universal-unsigned.zip
+        sha256: 499b7b6ce8651eb5623249ef792dce5bd278f348e52ed0952ea631128039702d
+        size: 21347874
       linux-x64:
-        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-13-g0103939ba4-x86_64.AppImage
-        sha256: 2c670c8b7d2e4f08ce6306790646d14929ec7fda0e35075e7cbe84a48f8e0dbe
-        size: 18426360
+        url: https://github.com/xemu-project/xemu/releases/download/pre-release/xemu-0.8.137-15-g8fc3208697-x86_64.AppImage
+        sha256: 68040e77c47b7aaf9bbd58bb8411a832284bc7d3eade1cc1529fe51827b5aebc
+        size: 17963512
