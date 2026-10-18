@@ -8,17 +8,17 @@ stable:
         size: 87626249
 preview: []
 nightly:
-  - version: 71f1149
+  - version: 132bf13
     assets:
       win-x64:
-        url: https://nightly.link/mamedev/mame/actions/artifacts/12107115098.zip
-        sha256: 8543c66bbf4dfeb84572a099bc864fb00c543509af43ef6752c0acd800cedbae
-        size: 141236711
+        url: https://nightly.link/mamedev/mame/actions/artifacts/12142501698.zip
+        sha256: faff42804385347a4e28663ab8ac96eaa2feb54a5e5c5918ec783ef5aa2e2708
+        size: 141281671
       macos-arm64:
-        url: https://nightly.link/mamedev/mame/actions/artifacts/12103405904.zip
-        sha256: 03ea47f935eb6feeacafdeeb26bb6185cd8cd99cd6435d5dd602d3bcec0cad3f
-        size: 111700492
+        url: https://nightly.link/mamedev/mame/actions/artifacts/12141585448.zip
+        sha256: d21297539d7e2a50362947b4d2cea12183db2b431dc09fd93c5a57e7f5e6e8ac
+        size: 111740047
       linux-x64:
-        url: https://nightly.link/mamedev/mame/actions/artifacts/12105864488.zip
-        sha256: 7f8eec02af72d71478c8ff8f7e95ceff664956dd1d76f6072e45dd51aaeb348a
-        size: 128143041
+        url: https://nightly.link/mamedev/mame/actions/artifacts/12142468876.zip
+        sha256: fbd4bd0770637b1236568c3ac2725e81d6421aee24747610caa1defecc8ddb46
+        size: 128164586
