@@ -16,17 +16,17 @@ stable:
         size: 29377664
 preview: []
 nightly:
-  - version: 0.84.0-alpha-e8b47
+  - version: 0.84.0-alpha-bb7a4
     assets:
       win-x64:
-        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-windows-x64-0.84.0-alpha-e8b47.zip
-        sha256: c134c8f74be7aa05a570a6d223d83006cf1d60c4b128dc27def31b4fd8bf2193
-        size: 20087269
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-windows-x64-0.84.0-alpha-bb7a4.zip
+        sha256: 8402f7b72d9938cc3f9a4789dff290018562bebf6553b695e1673d6296dd327f
+        size: 20088695
       macos-arm64:
-        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-macOS-universal-0.84.0-alpha-e8b47.dmg
-        sha256: 0593ac3c2c43dc08bebf7797e877f4e7b1636f3893385bd43f087ab34baaf484
-        size: 24640020
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-macOS-universal-0.84.0-alpha-bb7a4.dmg
+        sha256: a9cdc4e0215cd0d8c615f90e6e421733803dcad5f9ded245162d378c08c069d8
+        size: 24641132
       linux-x64:
-        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-linux-x86_64-0.84.0-alpha-e8b47.tar.xz
-        sha256: 0cc2c467074dd9bef405acf1879f56f6978e70f72f699222b5162e8535448450
-        size: 11729616
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/dev-latest/dosbox-staging-linux-x86_64-0.84.0-alpha-bb7a4.tar.xz
+        sha256: 0a8c84e49934807a86f48d3f299799bf9983fe6516beecccfdf597ab872999e2
+        size: 11730636
