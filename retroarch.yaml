@@ -27,6 +27,6 @@ nightly:
         sha256: 23a193be336d32b2162fa26aebd5ae1fcfd29baf5691935d18cca4141ba72944
         size: 247192157
       linux-x64:
-        url: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-19_RetroArch.7z
-        sha256: beea0eef204136df3857ebfbd43cd2b4c250d3634685fb2a1030b8ec6780c441
-        size: 191027202
+        url: https://buildbot.libretro.com/nightly/linux/x86_64/2026-10-20_RetroArch.7z
+        sha256: 38022fc033f3c204262d09e3f80d5260b9ea5f35ac8904499aad88c43c5be2a8
+        size: 191022115
