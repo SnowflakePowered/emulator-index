@@ -16,13 +16,13 @@ stable:
         size: 1888406
 preview: []
 nightly:
-  - version: ba95bab
+  - version: 3be6336
     assets:
       win-x64:
-        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-msvc-x64-gba95bab.zip
-        sha256: ed028891e1ea1e0d4e13403ee9f5ccfcbe0d8151ec1b43774857e498ee027ac6
-        size: 2321461
+        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-msvc-x64-g3be6336.zip
+        sha256: 131d3311de0ba1105393c38cb12ba543265fe1b624187ee95065a20a177836fc
+        size: 2322380
       linux-x64:
-        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-linux-x64-gba95bab.tar.gz
-        sha256: 0ea26ffd3a1cd12969da110a3c8cc0f9aec98201fcacf9ad54a70f3486fc8e0e
-        size: 1067396
+        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-linux-x64-g3be6336.tar.gz
+        sha256: 03b84a1b8b957c56fd5a8a4617a69eb0aae2cd8baa0411c4b27c9a2295bf3ca5
+        size: 1069127
