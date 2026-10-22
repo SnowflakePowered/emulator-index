@@ -30,7 +30,3 @@ nightly:
         url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/12282930572.zip
         sha256: 1d98fd4b31b4a094a2ec31af2c11c035c30a3177385328c12750c6f5673269e6
         size: 101793281
-      linux-x64:
-        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/12280699128.zip
-        sha256: 4bec2a0220372ac1c7da624eec8a2b99f2b710d5d13094cc30faf37149989b13
-        size: 84474186
