@@ -16,13 +16,13 @@ stable:
         size: 34289284
 preview: []
 nightly:
-  - version: 906e9eb
+  - version: 7d8dea4
     assets:
       win-x64:
-        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501355970.zip
-        sha256: 19ecbf833d488962ea2d79c13a80e9d92f0dd714772d9c477fa8d4c81e9deb81
-        size: 14767101
+        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/12384133198.zip
+        sha256: 001c74c946a73da9c491109364ef21c239907a806701c8eb8c4dd1a742da47ab
+        size: 14767482
       macos-arm64:
-        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/9501678370.zip
-        sha256: 37dbe30af6ee004e71e18fd32291483434049b9a247db49b81e8f9aaa44276b5
-        size: 24822760
+        url: https://nightly.link/melonDS-emu/melonDS/actions/artifacts/12384572636.zip
+        sha256: 577405c03f812005e63c1c805211c2ee74713da84622a23fee076a3b2946f34b
+        size: 24897136
