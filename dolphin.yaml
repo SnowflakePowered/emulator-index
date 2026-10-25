@@ -16,17 +16,17 @@ stable:
         size: 17798088
 preview: []
 nightly:
-  - version: 2609-113
+  - version: 2609-119
     assets:
       win-x64:
-        url: https://dl.dolphin-emu.org/builds/76/2f/dolphin-master-2609-113-x64.7z
-        sha256: 22bde8c3c3a418f831496eaba3972fadaa43cc22e1022b4a7da8951046a0c780
-        size: 20037908
+        url: https://dl.dolphin-emu.org/builds/c7/9d/dolphin-master-2609-119-x64.7z
+        sha256: 77bbd732805fef51633e5d67df9576d5ea721fc6db5ff326410c1cc06850e207
+        size: 20031503
       macos-arm64:
-        url: https://dl.dolphin-emu.org/builds/e3/09/dolphin-master-2609-113-universal.dmg
-        sha256: 40b5beb19f6f037a129608cb85487f5877ed32f6a0581c2f7284741537a3703b
-        size: 42000206
+        url: https://dl.dolphin-emu.org/builds/83/49/dolphin-master-2609-119-universal.dmg
+        sha256: 0f046961aa630c615bbd329fd95d3b226a133ab775568b6015b7da2e9c15b0e1
+        size: 41999073
       linux-x64:
-        url: https://dl.dolphin-emu.org/builds/0a/2a/dolphin-master-2609-113-x86_64.flatpak
-        sha256: 412f7cf04e4a6fa3b196c9f8a30f4f96eae5b777549bbb380a19eabfc1d40c8b
-        size: 17870400
+        url: https://dl.dolphin-emu.org/builds/01/48/dolphin-master-2609-119-x86_64.flatpak
+        sha256: 34d2afa988a7c757f37a98c84f4be6bc20bf6fa369cc74f9b635a4a60b96f6b5
+        size: 17826192
