@@ -8,9 +8,9 @@ stable:
         size: 11374798
 preview: []
 nightly:
-  - version: 15110cf
+  - version: 1f873fe
     assets:
       win-x64:
-        url: https://nightly.link/tonioni/WinUAE/actions/artifacts/12670447662.zip
-        sha256: eef964a1d80e5b98f8642a8a0500b9e784ef4eee5b28c080db0c35a55e38931d
-        size: 13451933
+        url: https://nightly.link/tonioni/WinUAE/actions/artifacts/12756966548.zip
+        sha256: 1bae01de4f5e27eed177c8dfb93cee2977d8d36e96d3290aee471f9d39b87d7c
+        size: 13450751
