@@ -2,13 +2,17 @@ name: kytyps5
 stable: []
 preview: []
 nightly:
-  - version: 2026-10-27-0685bff
+  - version: 2026-10-28-6c01401
     assets:
+      win-x64:
+        url: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-28-6c01401/KytyPS5-2026-10-28-6c01401-Windows-x64.zip
+        sha256: 268aff4d07cafbeaa8b3b878305078b7ea250cf28bd4856bd64e80bd3f978ca1
+        size: 30916715
       macos-x64:
-        url: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-27-0685bff/KytyPS5-2026-10-27-0685bff-macOS-x86_64.zip
-        sha256: 2f5802b69b51c8dabad23ec90da3d482f43ed2568f2af30b02644783a78d543e
-        size: 60053499
+        url: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-28-6c01401/KytyPS5-2026-10-28-6c01401-macOS-x86_64.zip
+        sha256: 78861d966db78164f8735ed45d42531a66f7d1805c204600b0c58d405b3817fd
+        size: 60014368
       linux-x64:
-        url: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-27-0685bff/KytyPS5-2026-10-27-0685bff-Linux-x86_64.tar.gz
-        sha256: 3f88b9a8f0f50358f06bc29b6e83f228aba5a792f90760f983023ffe8270a34c
-        size: 78777956
+        url: https://github.com/KytyPS5/KytyPS5/releases/download/KytyPS5-2026-10-28-6c01401/KytyPS5-2026-10-28-6c01401-Linux-x86_64.tar.gz
+        sha256: 6309d7262bab1e5a132bcf1f3d8f42e8ab6944b856bb0f871b90b5ff20535c88
+        size: 78769178
