@@ -16,21 +16,21 @@ stable:
         size: 61423960
 preview: []
 nightly:
-  - version: 42876aa
+  - version: e710761
     assets:
       win-x64:
-        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12690950991.zip
-        sha256: d2e805ef4ef9d49c412976d854b367e1d455d1d63cc6769f738b82722696f9b3
-        size: 11536873
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12935963147.zip
+        sha256: d50be4ff66e950754e4404245cc0978893d2dbc22cfe711012d6adaa1ef12f3f
+        size: 11536931
       macos-arm64:
-        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12690300881.zip
-        sha256: 94aba2b06faef7a900bbe9de070ba1d2e99d50c0ea902e5c373e439d75bddf51
-        size: 35241069
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12936368573.zip
+        sha256: ff5bb35e18dd84c39c6ecddf945439e47b95c3ef92aef08ac9f8ea734fa9e7f6
+        size: 35240881
       macos-x64:
-        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12691420047.zip
-        sha256: 144ba6e9ce7971ab2cb872bc75420143cc1dc195461141d3b20d99aa5fbf6e6f
-        size: 36568257
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12935174766.zip
+        sha256: 721001aa45e90b877f434d25d46ea5d0a0d01fc6aaf5f3c48d6545f2363a85d4
+        size: 36568885
       linux-x64:
-        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12691096965.zip
-        sha256: 385a9e7499707229f9e12486019f88f38ade329726d527e4368f325e5817d26f
-        size: 62582128
+        url: https://nightly.link/cemu-project/Cemu/actions/artifacts/12936556092.zip
+        sha256: efd6beed9bf98344ab73af94f595b9ea62e906c6c438a98425ae47837a3f2a67
+        size: 62581532
