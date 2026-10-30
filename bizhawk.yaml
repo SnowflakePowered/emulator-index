@@ -12,13 +12,13 @@ stable:
         size: 97169408
 preview: []
 nightly:
-  - version: 530a7e5
+  - version: dbdcef3
     assets:
       win-x64:
-        url: https://nightly.link/TASEmulators/BizHawk/actions/artifacts/12583579770.zip
-        sha256: 77091b30858759ad260ec814ba01917a0df56e54524fab0b0cb2bddbeb57211e
-        size: 98492402
+        url: https://nightly.link/TASEmulators/BizHawk/actions/artifacts/12962187082.zip
+        sha256: 050b00d8ccad75503f5abb88c21b3f7d3df29823fe2da20125ba23ef57b78414
+        size: 107632647
       linux-x64:
-        url: https://nightly.link/TASEmulators/BizHawk/actions/artifacts/12583589760.zip
-        sha256: b99f077f1359c349df80124ad73384373d240538ee5d459c1c3ab16d44002911
-        size: 97704233
+        url: https://nightly.link/TASEmulators/BizHawk/actions/artifacts/12962935067.zip
+        sha256: 87762f123d3b69d41c704470fc4d3b0da2a121b977a7aae6b69035b6e3ce6208
+        size: 106844478
