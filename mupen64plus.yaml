@@ -16,13 +16,13 @@ stable:
         size: 1888406
 preview: []
 nightly:
-  - version: 3be6336
+  - version: dc1411a
     assets:
       win-x64:
-        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-msvc-x64-g3be6336.zip
-        sha256: 131d3311de0ba1105393c38cb12ba543265fe1b624187ee95065a20a177836fc
-        size: 2322380
+        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-msvc-x64-gdc1411a.zip
+        sha256: 2907238d1bcca60f9e6aad87ed0b08346b6f6f5e09928c62d775722e9a5fc8dd
+        size: 2322384
       linux-x64:
-        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-linux-x64-g3be6336.tar.gz
-        sha256: 03b84a1b8b957c56fd5a8a4617a69eb0aae2cd8baa0411c4b27c9a2295bf3ca5
-        size: 1069127
+        url: https://github.com/mupen64plus/mupen64plus-core/releases/download/nightly-build/mupen64plus-core-linux-x64-gdc1411a.tar.gz
+        sha256: 51457fbd7d78aedd06853ffea3ef278a4f0b0e945106127556c79d88807c7d8b
+        size: 1068502
