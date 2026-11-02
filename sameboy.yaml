@@ -1,5 +1,15 @@
 name: sameboy
 stable:
+  - version: 1.0.5
+    assets:
+      win-x64:
+        url: https://github.com/LIJI32/SameBoy/releases/download/v1.0.5/sameboy_winsdl_v1.0.5.zip
+        sha256: 5aa92fb376b53b57361b15c29a6ff5a4494f7ae6f4ba7cbdfa6ef8375765b655
+        size: 1632304
+      macos-arm64:
+        url: https://github.com/LIJI32/SameBoy/releases/download/v1.0.5/sameboy_cocoa_v1.0.5.zip
+        sha256: a80890e3b9ef59c31cb4da458f30b13430ec2b887d9f884cea4cb55376e2a3ef
+        size: 4834189
   - version: 1.0.4
     assets:
       win-x64:
