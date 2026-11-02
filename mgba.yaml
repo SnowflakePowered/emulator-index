@@ -16,17 +16,17 @@ stable:
         size: 25208000
 preview: []
 nightly:
-  - version: 9167-52de910
+  - version: 9172-efecc23
     assets:
       win-x64:
-        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-31-win64-9167-52de910807c0178d6cfb088aa350952569e8f08f.7z
-        sha256: 920a7397cd95b9dc5c17d5cf670f95e4367c1977db378137b00e0470b6764127
-        size: 15747252
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-11-02-win64-9172-efecc23ec176195687e488374a471353c3661d1e.7z
+        sha256: 149f7fdba3d479cbe493228bd9bd17764fffe559016dcf80b02e8a2f0a98023a
+        size: 15755411
       macos-arm64:
-        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-31-macos-9167-52de910807c0178d6cfb088aa350952569e8f08f.dmg
-        sha256: 782fa29541cced18b41b6223ef4ee34f5469df328f17037732cf17540590f93a
-        size: 35218724
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-11-02-macos-9172-efecc23ec176195687e488374a471353c3661d1e.dmg
+        sha256: f8c48a78ce88778a09fcf08fd9e44f02f54b563a63bd0ff1f09bd8c20fd0874e
+        size: 35220295
       linux-x64:
-        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-10-31-appimage-x64-9167-52de910807c0178d6cfb088aa350952569e8f08f.appimage
-        sha256: e06a01816e86c1c248b9c91d89fb90059bd2852219147cf696e137f6d59f9db0
-        size: 27376120
+        url: https://s3.amazonaws.com/mgba/build/mGBA-build-2026-11-02-appimage-x64-9172-efecc23ec176195687e488374a471353c3661d1e.appimage
+        sha256: 8a5a3a182fc848107a029509cda754a18b877d5d0ac8ca1e702eb65d207f0250
+        size: 27499000
