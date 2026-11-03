@@ -12,13 +12,13 @@ stable:
         size: 21103682
 preview: []
 nightly:
-  - version: f41ce34
+  - version: 5f16499
     assets:
       win-x64:
         url: https://github.com/finalburnneo/FBNeo/releases/download/latest/windows-x86_64.zip
-        sha256: 21f4204b73fb475121377e1741d70ba9289456b06786e6d43cfc8e284be72880
-        size: 16929566
+        sha256: f9d009550e07e322b779143d804d49daeb952d5e093ac12acc632856e5673cb1
+        size: 16932673
       linux-x64:
         url: https://github.com/finalburnneo/FBNeo/releases/download/latest/linux-sdl2-x86_64.zip
-        sha256: cd9a9e3a966bff2b459cab65a9ef5359d1ae44d1db714f6b5b1f5ee11469e547
-        size: 15950160
+        sha256: 82e8dee965dcc39304e7341b5020b9d43952e5d85b27c07712cc31ceeed1e954
+        size: 15952021
