@@ -16,17 +16,17 @@ stable:
         size: 60119544
 preview: []
 nightly:
-  - version: 2.9.153
+  - version: 2.9.155
     assets:
       win-x64:
-        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.153/pcsx2-v2.9.153-windows-x64-Qt.7z
-        sha256: 485c2f4f75964ddd91fbf10ca916dbfdcc7af84cbb49f2662a450fe8114d74f1
-        size: 31699802
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.155/pcsx2-v2.9.155-windows-x64-Qt.7z
+        sha256: 8de0e80fc7c4138c7f78c8322393d11ef61430fd0bd7c05204efada4638a9815
+        size: 31704720
       macos-arm64:
-        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.153/pcsx2-v2.9.153-macos-Qt.tar.xz
-        sha256: 5af93ea5e956dc3c20fd8bf7b075d5b58d12e82da14eb25e7d75f79c46721edf
-        size: 24526140
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.155/pcsx2-v2.9.155-macos-Qt.tar.xz
+        sha256: 0f45f54cd8492ca36154774abb5e8038097144fd6f0035aa86337cfba502de07
+        size: 24531888
       linux-x64:
-        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.153/pcsx2-v2.9.153-linux-appimage-x64-Qt.AppImage
-        sha256: e9910733ab11d851b34c4d8f7423600ffb45b41befa3c06aadcb6425ac46c238
-        size: 60434936
+        url: https://github.com/PCSX2/pcsx2/releases/download/v2.9.155/pcsx2-v2.9.155-linux-appimage-x64-Qt.AppImage
+        sha256: 5eee1055849aca9e6f9a78b3611a426e426cd99c2c565270e4581c293ff0b2e9
+        size: 60443128
