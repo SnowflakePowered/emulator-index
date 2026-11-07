@@ -16,17 +16,17 @@ stable:
         size: 50689748
 preview: []
 nightly:
-  - version: v1.20.4-4555-gfc8392b01a3b
+  - version: v1.20.4-4634-g9f286ee4ca10
     assets:
       win-x64:
-        url: https://builds.ppsspp.org/builds/v1.20.4-4555-gfc8392b01a3b/ppsspp_win_v1.20.4-4555-gfc8392b01a3b.zip
-        sha256: 3cec17ea889986275095610a3f71edc574e6f3f1a8005db716585f082aa5be9c
-        size: 27767913
+        url: https://builds.ppsspp.org/builds/v1.20.4-4634-g9f286ee4ca10/ppsspp_win_v1.20.4-4634-g9f286ee4ca10.zip
+        sha256: cbf8d93d6a9821fd99bc362c283f029e0734d84ac151c1de805af23174bfde09
+        size: 27830075
       macos-arm64:
-        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/13507226161.zip
-        sha256: 450f97b3998f7460225d12aef19fe70a977322ad88e953e2951d3654e44a40f1
-        size: 41702109
+        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/13576121683.zip
+        sha256: f50903eb3c665d1698db2b8ee9b80a325c99b0c1ca665254dea793da26f490c8
+        size: 42189043
       linux-x64:
-        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/13507040920.zip
-        sha256: 2fd505b605da1a47e96591d42ba8ccf65e0a6e88127f39cd0173c4a3190933a0
-        size: 110765501
+        url: https://nightly.link/hrydgard/ppsspp/actions/artifacts/13574924301.zip
+        sha256: a14eb99d9962db01ccb10b235ce1bd551ea76d79bc00dbd35e3ca4774439eace
+        size: 56219153
