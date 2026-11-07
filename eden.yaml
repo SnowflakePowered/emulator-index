@@ -16,17 +16,17 @@ stable:
         size: 69276651
 preview: []
 nightly:
-  - version: 07677aa500
+  - version: 885b333c08
     assets:
       win-x64:
-        url: https://nightly.eden-emu.dev/v1793745818.07677aa500/Eden-Windows-07677aa500-amd64-clang-pgo.zip
-        sha256: 6a188a2a98cad620dca47bb514b74cacb3f523d046a8de9cfa3db6286687d120
-        size: 41056842
+        url: https://nightly.eden-emu.dev/v1794004511.885b333c08/Eden-Windows-885b333c08-amd64-clang-pgo.zip
+        sha256: cf7844e483636772bcdc53380b2076e0d2df08575d543a19cc5e99a6d11398da
+        size: 41073008
       macos-arm64:
-        url: https://nightly.eden-emu.dev/v1793745818.07677aa500/Eden-macOS-07677aa500.dmg
-        sha256: 76f71966cba5c90e8a5e97643734d9f2de7c5d94a7394129ffd5ae8a38a67d08
-        size: 26669304
+        url: https://nightly.eden-emu.dev/v1794004511.885b333c08/Eden-macOS-885b333c08.dmg
+        sha256: b53821063ef29798d51ec9c4651009291beeebd834ca70384e418fb538640afe
+        size: 26671165
       linux-x64:
-        url: https://nightly.eden-emu.dev/v1793745818.07677aa500/Eden-Linux-07677aa500-amd64-clang-pgo.AppImage
-        sha256: 76f33d09fad9a4a9722e08c5d0c2c2175b4940662f3dc4aff23fb31d98e52834
-        size: 69208117
+        url: https://nightly.eden-emu.dev/v1794004511.885b333c08/Eden-Linux-885b333c08-amd64-clang-pgo.AppImage
+        sha256: de6a81756079b4440b58b83e451330a8fe65fc492df4cff63ca6ae82e0501569
+        size: 69236091
