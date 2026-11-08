@@ -1,5 +1,19 @@
 name: dolphin
 stable:
+  - version: 2609b
+    assets:
+      win-x64:
+        url: https://dl.dolphin-emu.org/releases/2609b/dolphin-2609b-x64.7z
+        sha256: 926eb7594d885b4fba8fd9807058d90618efab4b3d75d1ef297022ba14925133
+        size: 20028240
+      macos-arm64:
+        url: https://dl.dolphin-emu.org/releases/2609b/dolphin-2609b-universal.dmg
+        sha256: d7a3464ae2b71106e9bce9f53dfdbf5a6a3df2637ee8f3f78234f77653eb0a64
+        size: 43433850
+      linux-x64:
+        url: https://dl.dolphin-emu.org/releases/2609b/dolphin-2609b-x86_64.flatpak
+        sha256: 0a95343bd8341b20095710060ed247e1f73849e03500467d20a83fb5b1483708
+        size: 17679912
   - version: 2609a
     assets:
       win-x64:
@@ -16,17 +30,17 @@ stable:
         size: 17798088
 preview: []
 nightly:
-  - version: 2609-191
+  - version: 2609-193
     assets:
       win-x64:
-        url: https://dl.dolphin-emu.org/builds/09/83/dolphin-master-2609-191-x64.7z
-        sha256: d1b1d1d8106e8abe91cd862a90be82bbe907c3f29f4fa2c4ea47e187a1a72a01
-        size: 20160476
+        url: https://dl.dolphin-emu.org/builds/91/5c/dolphin-master-2609-193-x64.7z
+        sha256: 7097fb7f75e9e49bd151d45e8454b63d155433ca788b0b481ced064bee528d9e
+        size: 20155958
       macos-arm64:
-        url: https://dl.dolphin-emu.org/builds/81/36/dolphin-master-2609-191-universal.dmg
-        sha256: b75f8810464c6577ef62e65cd1567d92696c177d1530c59a4e9400cbeb4bd9c8
-        size: 42097007
+        url: https://dl.dolphin-emu.org/builds/3c/77/dolphin-master-2609-193-universal.dmg
+        sha256: bc54dfce74db405eb08890210f6b5c6c989696ddca0d5f2565b21da80d4b2afb
+        size: 43640408
       linux-x64:
-        url: https://dl.dolphin-emu.org/builds/4a/be/dolphin-master-2609-191-x86_64.flatpak
-        sha256: 40ad39424dd135665ec7b1a115865d7f5ae30d29f4461be3f2a54e62abf96d83
-        size: 17809064
+        url: https://dl.dolphin-emu.org/builds/cd/6d/dolphin-master-2609-193-x86_64.flatpak
+        sha256: 408f7aca1af50a234fc43e5f79023494ab263ff36aa7b6047d575fc517f0b4a6
+        size: 17814064
