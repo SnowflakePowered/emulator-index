@@ -2,13 +2,17 @@ name: rpcs3
 stable: []
 preview: []
 nightly:
-  - version: 0.0.43-20570
+  - version: 0.0.43-20572
     assets:
       win-x64:
-        url: "null"
+        url: https://github.com/RPCS3/rpcs3-binaries-win/releases/download/build-e61d5eaf0f7135e578a5280b2bb2bd5c8a1c439f/rpcs3-v0.0.43-20572-e61d5eaf_win64_msvc.7z
+        sha256: ba61031d407714a3c2d8cfc8a7f616d7601dd6896c59c2bd1ab7399a42079b29
+        size: 37200829
       macos-arm64:
-        url: '{"message":"Not Found","documentation_url":"https://docs.github.com/rest/releases/releases#get-a-release-by-tag-name","status":"404"}'
+        url: https://github.com/RPCS3/rpcs3-binaries-mac-arm64/releases/download/build-e61d5eaf0f7135e578a5280b2bb2bd5c8a1c439f/rpcs3-v0.0.43-20572-e61d5eaf_macos_aarch64.7z
+        sha256: 8c01aa6cbf5de434a8541532b290eed71c7301b03e2d514c39218d5c30c203e9
+        size: 35595337
       linux-x64:
-        url: https://github.com/RPCS3/rpcs3-binaries-linux/releases/download/build-13a3cd4266158911a8c555dda59005bc20fd2a66/rpcs3-v0.0.43-20570-13a3cd42_linux64.AppImage
-        sha256: 41a888e275db309b53bebfe40c7042b233bf1f327f8c186a104c88b505d241d2
-        size: 83113295
+        url: https://github.com/RPCS3/rpcs3-binaries-linux/releases/download/build-e61d5eaf0f7135e578a5280b2bb2bd5c8a1c439f/rpcs3-v0.0.43-20572-e61d5eaf_linux64.AppImage
+        sha256: c34a9e553846842c2be073bfa4980c2fec587362ad022c100b8391ca66847fc8
+        size: 83091968
