@@ -30,17 +30,17 @@ stable:
         size: 65595480
 preview: []
 nightly:
-  - version: f6b9fcd
+  - version: 75f8ef2
     assets:
       win-x64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13884838162.zip
-        sha256: 3525ca689fd04167cdbd3308a4af1a86dfa29349d047885530ae6f345ab1907b
-        size: 33192707
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13977864373.zip
+        sha256: 4632e16145274f9b561eb24dc8755d91d962a970ac41435648021c211f5c9acf
+        size: 33116587
       macos-arm64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13885713171.zip
-        sha256: ec12e8848d0de291b610cc234c35447d387acb7d388fe9baa35f7ee3a65dd9a3
-        size: 69374639
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13978944211.zip
+        sha256: 1dd1a055d959ea20822ebf9b982548e2ce8529fe0cae53786f66ec156c7452bc
+        size: 69318707
       linux-x64:
-        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13885147866.zip
-        sha256: 71b4a3c2cfb1faf85c9b7c5ac5e741133a3dc651866e69db651aa92af6fb0448
-        size: 180967914
+        url: https://nightly.link/gopher64/gopher64/actions/artifacts/13978407382.zip
+        sha256: 9046a0f3a77d2aa0dc4a8d73781fa13891fdd5b7e8004709b5a53511c753abcb
+        size: 180195115
