@@ -16,21 +16,21 @@ stable:
         size: 102364921
 preview: []
 nightly:
-  - version: e2b92bb
+  - version: 78c0229
     assets:
       win-x64:
-        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13689219269.zip
-        sha256: d165af75b47b88ea389fb1ecab849758d8312c2ee1b184f0e709fc17d9f22053
-        size: 45237021
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13946932183.zip
+        sha256: 5c7960f3a0b50ea5926b7600c436c28f600cb3aa88f60c1490b220c6e5b76745
+        size: 45238901
       macos-arm64:
-        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13689325804.zip
-        sha256: 3226be0b80cf68930abd432126863311ec4c3b60b1756a7fabaf46103fe196e4
-        size: 93793762
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13944775691.zip
+        sha256: 042021faa40ec5e3cabf799b61c4f860ad620fb1ed13a4e16d80be94b150d9e4
+        size: 93792746
       macos-x64:
-        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13688529005.zip
-        sha256: 1b541f7172fadbae2680c1d9ab365b00ba3af0bd4930b4d9d75c737d31790e96
-        size: 101819188
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13944974446.zip
+        sha256: bfdb4b07fb8fa5f84e71806b97de6f7217910e8718299cbf737961f12a922447
+        size: 101819517
       linux-x64:
-        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13689805884.zip
-        sha256: fb82d7bfafc1f3ff32ce44ee4d1ebe1b7998fa9bbefc72b144380a9efbbe53f5
-        size: 84524340
+        url: https://nightly.link/joncampbell123/dosbox-x/actions/artifacts/13947245756.zip
+        sha256: 88734e4f141bba0f1c5fd96787303d1dd6d3678f5e95e5f7ecdd61891a92a9de
+        size: 84516204
