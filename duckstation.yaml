@@ -58,17 +58,17 @@ preview:
         sha256: eef887bacce0b3cd9a943fb6718e7e2b8970edcf7e88c7eb30cee750d71037d5
         size: 95629600
 nightly:
-  - version: 59f500d
+  - version: bddb05f
     assets:
       win-x64:
         url: https://github.com/stenzek/duckstation/releases/download/preview/duckstation-windows-x64-release.zip
-        sha256: cf5aad9ae99af732deace44e96dcb109e72f5e264ba684ac34fce52945ee8cea
-        size: 75119643
+        sha256: 5edee1e9b70319f9592310d47a708fd6d3a0db24d609568bd0af9e47176e67dd
+        size: 75122405
       macos-arm64:
         url: https://github.com/stenzek/duckstation/releases/download/preview/duckstation-mac-release.zip
-        sha256: 6c0d846fc759f317cf736e8d222287198033cc5b08359c25e651792be7d1d99c
-        size: 97264688
+        sha256: e85d69bf994f9b27ce4c0f1083ba05470dc9e913f67102f3716e1f46608d0d64
+        size: 97267564
       linux-x64:
         url: https://github.com/stenzek/duckstation/releases/download/preview/DuckStation-x64.AppImage
-        sha256: 30864e55206382b3ec148549d075ad4d76c07d6af405198e57f7df5618f0e997
-        size: 95826208
+        sha256: bf24e2eb388cac725bf67872058cb99ccf18c16ef4fb35fa6136e4fc2914e643
+        size: 95846688
