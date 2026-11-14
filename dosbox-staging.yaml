@@ -1,5 +1,19 @@
 name: dosbox-staging
 stable:
+  - version: 0.83.1
+    assets:
+      win-x64:
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/v0.83.1/dosbox-staging-windows-x64-v0.83.1.zip
+        sha256: 22026101687c74f6d7b5443a114a3236f419d3651b20d09aec973031e8a1aec0
+        size: 37668364
+      macos-arm64:
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/v0.83.1/dosbox-staging-macOS-v0.83.1.dmg
+        sha256: a016f04c25b0c27cc3dfa4165cd7242feb36d647fc9b3e4990ca83257d1012ad
+        size: 44185617
+      linux-x64:
+        url: https://github.com/dosbox-staging/dosbox-staging/releases/download/v0.83.1/dosbox-staging-linux-x86_64-v0.83.1.tar.xz
+        sha256: 3c7c925e28a5c88ae9f9f1a315ad07d91176b135fbe5f6f240eeee148ed176b0
+        size: 29267356
   - version: 0.83.0
     assets:
       win-x64:
