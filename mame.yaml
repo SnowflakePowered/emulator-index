@@ -8,9 +8,17 @@ stable:
         size: 87626249
 preview: []
 nightly:
-  - version: 0b3dc0b
+  - version: 0e260ce
     assets:
       win-x64:
-        url: https://nightly.link/mamedev/mame/actions/artifacts/14277078487.zip
-        sha256: a0aa4dcf1fb0781055e7a1e93d7636013852f7a8367dddba039e1771b079a22d
-        size: 143458160
+        url: https://nightly.link/mamedev/mame/actions/artifacts/14369205239.zip
+        sha256: 5a62925c7d2c869261cfa7bb471906f2af4622ebd4048d4b7da3ffa8252753b1
+        size: 143494110
+      macos-arm64:
+        url: https://nightly.link/mamedev/mame/actions/artifacts/14349365770.zip
+        sha256: 5d2038eee9599c887d6691273a704cfd734416875ef44d51bc3e0ca5fe5f6ccb
+        size: 113556809
+      linux-x64:
+        url: https://nightly.link/mamedev/mame/actions/artifacts/14368612164.zip
+        sha256: 9be21a31ea69256669c5522a5753fb17d88e937634ae0b2813fadd1bf6008c4a
+        size: 130598456
