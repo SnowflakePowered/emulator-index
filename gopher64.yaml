@@ -1,5 +1,19 @@
 name: gopher64
 stable:
+  - version: 1.2.2
+    assets:
+      win-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.2.2/gopher64-windows-x86_64.exe
+        sha256: 539e12d139abd7e0b5cc8b78016c0cefb3aec5eaefdcfc501d66b5a30b03ba70
+        size: 60010816
+      macos-arm64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.2.2/gopher64-macos-aarch64.zip
+        sha256: 8aa8fc44e0f41b0306d5e441a3413a0d1a3d3e7016257d2a57c88d5229284e2c
+        size: 32013054
+      linux-x64:
+        url: https://github.com/gopher64/gopher64/releases/download/v1.2.2/gopher64-linux-x86_64
+        sha256: da9cfd625394d317592d2e1e0d47e1bf61c3f294eccb5c59a806f68bb5a77b85
+        size: 62903192
   - version: 1.2.1
     assets:
       win-x64:
