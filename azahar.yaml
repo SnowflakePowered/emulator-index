@@ -92,18 +92,18 @@ preview:
         sha256: 8d1311c7641c2fcfa2bc384963fc51773e7b92158e4abdb73e08e23385d91905
         size: 135330296
 nightly:
-  - version: be43b67
-    run: 44736011445
+  - version: c8f4c11
+    run: 44849065720
     assets:
       win-x64:
-        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14632206020.zip
-        sha256: 2e97432259a05f0cf2fe2d717df7b3df95844ab6b26952737815c526036caba3
-        size: 53453941
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14687055477.zip
+        sha256: a2a6f00c7f28b52977c2433eed04ca88c4faa53858ef40cdca9216b62a7355b1
+        size: 53456406
       macos-arm64:
-        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14634635493.zip
-        sha256: ea528151439382952bd22183288e16f95ed5dc99df5d1a10f9f96d27452c2174
-        size: 330605330
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14688676277.zip
+        sha256: 7dd6a9c89612100c3f137fe7077b7e502ede94b94fd312f71c75419cb585caa8
+        size: 330615723
       linux-x64:
-        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14629511171.zip
-        sha256: abba55d083b23d6004f845dc11e4ad3450e9bc1654d2a6ee442e8d09969f6333
-        size: 134771342
+        url: https://nightly.link/azahar-emu/azahar/actions/artifacts/14685096174.zip
+        sha256: 46779ecc3f6782939460578223435ae929000aa0556e2006eefef159cfdd382d
+        size: 134781062
