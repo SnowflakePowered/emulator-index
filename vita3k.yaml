@@ -2,17 +2,17 @@ name: vita3k
 stable: []
 preview: []
 nightly:
-  - version: 64e655d
+  - version: a631dd3
     assets:
       win-x64:
         url: https://github.com/Vita3K/Vita3K/releases/download/continuous/windows-latest.zip
-        sha256: 5bbc2a1fa6eaa6f07bd7c4488207bfe8e0a4dc1dc45f37d6f3c74249ebf319a3
-        size: 38204516
+        sha256: 1fdf330fc87b570f78705d69abe2c135fe122f73139feee271b3efd0c3d4b181
+        size: 38207375
       macos-arm64:
         url: https://github.com/Vita3K/Vita3K/releases/download/continuous/macos-arm64-latest.dmg
-        sha256: 1dba681a1add586c6d89f6365599275bc3acdb496e31f422f1dd52fe10e1d3eb
-        size: 60724946
+        sha256: d97fc77c041bdec84140d3294874fb886f60572ddb319d502c523d51d80adf5f
+        size: 60729101
       linux-x64:
         url: https://github.com/Vita3K/Vita3K/releases/download/continuous/Vita3K-x86_64.AppImage
-        sha256: 503c45eec55886c9788bf5ca95aba458ef4b879f0ad32e7fdd28b234aea34c97
-        size: 89888739
+        sha256: c1eea9ffebfd37a55e0bba79dfcfaa7fffe98bafa5d8f937a8be768efd2df099
+        size: 90183882
