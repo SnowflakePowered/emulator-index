@@ -56,21 +56,21 @@ stable:
         size: 8824540
 preview: []
 nightly:
-  - version: 0.4.2-dev_459959f2
+  - version: 0.4.2-dev_1526ade4
     assets:
       win-x64:
-        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-windows-x86_64-AVX2-v0.4.2-dev_459959f2.zip
-        sha256: 5b50185963f3e6812d988de93f32361bb8738c58d76757673702e86d3db1bf00
-        size: 21017007
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-windows-x86_64-AVX2-v0.4.2-dev_1526ade4.zip
+        sha256: ea708c2315f8ff4258f0d6bc92e0963a91e19f2f530cdc04ef9ab47f488ba8e1
+        size: 21018072
       macos-arm64:
-        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-arm64-v0.4.2-dev_459959f2.zip
-        sha256: c95205eb5de623c15776d54ebb29f0de163757e39d8e4e8363a680126822f923
-        size: 8789207
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-arm64-v0.4.2-dev_1526ade4.zip
+        sha256: 046e79aea9b9eca52a764b1647fd045a7f002a49f44ade1ffb172b471b5360cf
+        size: 8790736
       macos-x64:
-        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-x64-v0.4.2-dev_459959f2.zip
-        sha256: 7212a373156242948ca2af5090d7e7e2d0f2947ab189434acf91761bb3da470d
-        size: 9335035
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-macos-x64-v0.4.2-dev_1526ade4.zip
+        sha256: 2a6fe102c958135a3242ddaf616b85527572b93d98bed2bbd60844cce5b5a16a
+        size: 9335382
       linux-x64:
-        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-linux-x86_64-AVX2-v0.4.2-dev_459959f2.tar.xz
-        sha256: ccf6332c8e42e4e4f73056e7f470fa1d2dc5185e00f24f32e628efacff8a7f61
-        size: 23595372
+        url: https://github.com/ymir-emu/Ymir/releases/download/latest-nightly/ymir-linux-x86_64-AVX2-v0.4.2-dev_1526ade4.tar.xz
+        sha256: e40a9a9b4c472d9fe59e5f6e87012c578f098621e4e6fab3fe1eea5ebca3c3b1
+        size: 23598464
