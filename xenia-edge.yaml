@@ -2,5 +2,5 @@ name: xenia-edge
 stable: []
 preview: []
 nightly:
-  - version: "20261126.7"
+  - version: "20261127.1"
     assets: {}
